@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load humanize %}
+
+{% load wagtailcore_tags wagtailimages_tags%}
+
+{% block body_class %}template-articlepage{% endblock %}
+
+{% block content %}
+    <p><a href="{{ page.get_parent.url }}">Back to news</a></p>
+    {% image page.image width-630 height-330 %}
+    <h1>{{ page.title }}</h1>
+    <p class="meta">{{ page.first_published_at }}</p>
+    <p>Last edited: {{ page.last_published_at|naturaltime }}</p>
+    <p>{{ page.author|richtext }}</p>
+    
+    {{ page.body|richtext }}
+    
+
+     {% for post in newspages %}
+        {% with post=post.specific %}
+            <article>
+                <a href="{% pageurl post %}">
+                    {% image post.image fill-270x152-c50 as image %}
+                    <img src="{{ image.url }}"/>
+                    <h3>{{ post.title }}</h3>
+                    <p>{{ post.first_published_at|naturaltime }}</p>
+                </a>
+            </article>
+        {% endwith %}
+    {% endfor %}
+ 
+{% endblock %}
