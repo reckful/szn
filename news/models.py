@@ -143,17 +143,3 @@ class ArticlePage(Page):
     # Specifies what content types can exist as children of BlogPage.
     # Empty list means that no child content types are allowed.
     subpage_types = []
-    
-    def get_posts(self, tag=None):
-        posts = ArticlePage.objects.live().descendant_of(self.get_parent().url)
-        if tag:
-            posts = posts.filter(tags=tag)
-        return posts
-        
-    def get_child_tags(self):
-        tags = []
-        for post in self.get_posts():
-            # Not tags.append() because we don't want a list of lists
-            tags += post.get_tags
-        tags = sorted(set(tags))
-        return tags
