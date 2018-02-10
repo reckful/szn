@@ -18,7 +18,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'pirrie$default',
+        'NAME': 'pirrie$dbszn',
         'USER': 'pirrie',
         'PASSWORD': 'lewisisgay123',
         'HOST': 'pirrie.mysql.pythonanywhere-services.com',
