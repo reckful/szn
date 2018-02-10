@@ -622,6 +622,12 @@ footer {
     fill: #21900C;
 }
 
+.news_sort ul li:last-child:hover .dropdown_content {
+    display: block;
+    opacity: 1;
+}
+
+
 .news_sort ul li img {
     transition: 0.1s ease;
     -webkit-moz-filter: grayscale(100%) contrast(30%);
@@ -667,6 +673,39 @@ footer {
 
 .news_sort ul li svg path {
     fill: #7a7a7a;
+}
+
+.dropdown_content {
+    padding: 3%;
+    box-sizing: border-box;
+    position: absolute;
+    width: 90%;
+    right: 0;
+    left: 0;
+    margin: auto;
+    max-width: 1240px;
+    top: 175px;
+    height: 50vh;
+    cursor: auto;
+    background-color: #fff;
+    transition: 1s ease;
+    opacity: 0;
+    display: none;
+}
+
+.dropdown_content a {
+    color: #505050;
+    transition: 0.2s ease;
+}
+
+.dropdown_content li {
+    margin-left: 0 !important;
+    margin-bottom: 10px !important;
+    margin-right: 0 !important;
+}
+
+.dropdown_content a:hover {
+    color: #21900C;
 }
 
 .news_featured {
@@ -1001,6 +1040,13 @@ footer {
     margin-bottom: 124px;
 }
 
+.content .article_header_info p {
+    margin: 0;
+    color: #21900C;
+    font-size: 14px;
+    font-weight: 500;
+}
+
 .content a {
     color: #21900C;
     font-size: 18px;	
@@ -1031,9 +1077,11 @@ footer {
     font-weight: 300;
 }
 
-.coins_mentioned {
-    margin-top: 30px;
-    margin-left: 5%;
+.content .article_date {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 0;
+    margin-top: 0;
 }
 
 .coins_mentioned {
@@ -1056,10 +1104,68 @@ footer {
 	color: #fff;
 	font-size: 15px;	
 	font-weight: bold;
-	padding: 6px 0;
+	padding: 8px 0;
+	justify-content: center;
+}
+
+.coin_card a p {
+    margin: 0;
 }
 
 .coin_card_inner {
     background: #E7E7E7;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
+    padding: 10px 10% 20px;
+}
+
+.coin_card_inner h2 {
+    color: #21900C;
+    font-size: 25px;
+    font-weight: 900;
+    margin: 10px 0;
+}
+
+.coin_card_inner p {
+    margin: 2px 0;
+    color: #3D3D3D;
+    font-size: 15px;	
+    font-weight: 500;
+}
+
+.coin_card_inner .coin_stats_label {
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+.coin_card .coin_card_inner .coin_percentage_change p {
+    color: #21900C;
+    font-size: 10px;	
+    font-weight: 500;
+    margin-left: 5px;
+}
+
+.coin_highlight {
+    color: #21900C;
+    font-weight: 700;
+}
+
+.related_news {
+    height: auto;
+    background-color: transparent;
+    margin-top: 30px;
+    margin-left: 2.5%;
+    width: 22.5%;
+}
+
+.recent_news_header {
+    color: #434343;
+    font-size: 18px;	
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.related_news .recent_news article {
+    margin-right: 0;
+    width: 100%;
 }

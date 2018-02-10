@@ -37,14 +37,19 @@ class NewsIndexPage(RoutablePageMixin, Page):
             tag = Tag.objects.get(slug=tag)
         except Tag.DoesNotExist:
             if tag:
-                msg = 'There are no articles tagged with "{}"'.format(tag)
+                msg = 'There are no articles mentioning the coin"{}"'.format(tag).upper()
                 messages.add_message(request, messages.INFO, msg)
             return redirect(self.url)
 
         posts = self.get_posts(tag=tag)
+        tags = []
+        for post in self.get_posts():
+            tags += post.get_tags
+            tags = sorted(set(tags))
         context = {
             'tag': tag,
-            'posts': posts
+            'posts': posts,
+            'tags': tags
         }
         return render(request, 'news/news_index_page.html', context)
 
@@ -143,3 +148,10 @@ class ArticlePage(Page):
     # Specifies what content types can exist as children of BlogPage.
     # Empty list means that no child content types are allowed.
     subpage_types = []
+    
+    def get_context(self, request):
+        # Update context to include only published posts, ordered by reverse-chron
+        context = super(ArticlePage, self).get_context(request)
+        newspages = self.get_parent().get_children().live().order_by('-first_published_at')[:4]
+        context['newspages'] = newspages
+        return context

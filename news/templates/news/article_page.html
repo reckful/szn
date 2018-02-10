@@ -8,62 +8,68 @@
 {% block body_class %}template-articlepage{% endblock %}
 
 {% block content %}
-    <main class="wrapper flex flex_align">
+    <main class="wrapper flex flex_align-content">
         <article class="content">
-            <a class="flex flex_align-items" href="{{ page.get_parent.url }}"><svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 459 459"><path d="M178.5 140.25v-102L0 216.75l178.5 178.5V290.7c127.5 0 216.75 40.8 280.5 130.05-25.5-127.5-102-255-280.5-280.5z" fill="#21900c"/></svg>Back to news</a>
+            <div class="article_header_info flex flex_align-items flex_justify-content">
+                <a class="flex flex_align-items" href="{{ page.get_parent.url }}"><svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 459 459"><path d="M178.5 140.25v-102L0 216.75l178.5 178.5V290.7c127.5 0 216.75 40.8 280.5 130.05-25.5-127.5-102-255-280.5-280.5z" fill="#21900c"/></svg>Back to news</a>
+                {{ page.author|richtext }}
+            </div>
             {% image page.image width-630 height-330 %}
             <h1>{{ page.title }}</h1>
-            <p class="meta">{{ page.first_published_at }}</p>
-            <p>Last edited: {{ page.last_published_at|naturaltime }}</p>
-            <p>{{ page.author|richtext }}</p>
             
             {{ page.body|richtext }}
+            
+            <p class="article_date">Published: {{ page.first_published_at }}</p>
+            <p class="article_date">Last edited: {{ page.last_published_at|naturaltime }}</p>
         </article>
         <aside class="coins_mentioned">
             <p class="coins_mentioned_header">Coin(s) mentioned</p>
             <div class="coin_card">
                 <div class="coin_card_inner">
-                    <div class="flex flex_align-center">
+                    <div class="flex flex_align-items">
                         <h2>NEM</h2>
-                        <h2>(XEM)</h2>
-                        <div>
-                            <p>Last 24h</p>
-                        </div>
+                        <p>Last 24h</p>
                     </div>
-                    <div class="flex flex_align-center">
-                        <p>Price:</p>
+                    <div class="flex flex_align-items">
+                        <p class="coin_stats_label">Price:</p>
                         <p>$0.939087</p>
-                        <div>
-                            
+                        <div class="coin_percentage_change">
                             <p>4.74%</p>
                         </div>
                     </div>
-                    <div class="flex flex_align-center">
-                        <p>Market Cap:</p>
+                    <div class="flex flex_align-items">
+                        <p class="coin_stats_label">Mkt Cap:</p>
                         <p>$8,451,782,999</p>
                     </div>
-                    <div class="flex flex_align-center">
-                        <p>Supply:</p>
-                        <p>8,999,999,999 XEM</p>
-                    </div>
-                </div>
-                <a href="">Buy NEM(XEM) Instantly</a>
+                    <div class="flex flex_align-items">
+                        <p class="coin_stats_label">Volume:</p>
+                        <p>$120,000</p>
+                    </div>                </div>
+                <a class="flex flex_align-items" href=""><p>Buy NEM Instantly</p></a>
             </div>
         </aside>
+        <nav class="related_news">
+            <p class="recent_news_header">Recent articles</p>
+            <div class="recent_news flex flex_align-content flex_direction">
+                {% for post in newspages %}
+                    {% with post=post.specific %}
+                        {% if post != page %}
+                            <article>
+                                <a href="{% pageurl post %}">
+                                    {% image post.image fill-270x152-c50 as image %}
+                                    <img src="{{ image.url }}"/>
+                                    <h3>{{ post.title|truncatechars:75 }}</h3>
+                                    <div class="flex flex_align-text">
+                                        <p>{{ post.first_published_at|naturaltime }}</p>
+                                        <p>{{ post.author|richtext }}</p>
+                                    </div>
+                                </a>
+                            </article>
+                        {% endif %}
+                    {% endwith %}
+                {% endfor %}
+            </div>
+        </nav>
     </main>
-    
-
-    {% for post in page.NewsIndexPage %}
-        {% with post=post.specific %}
-            <article>
-                <a href="{% pageurl post %}">
-                    {% image post.image fill-270x152-c50 as image %}
-                    <img src="{{ image.url }}"/>
-                    <h3>{{ post.title }}</h3>
-                    <p>{{ post.first_published_at|naturaltime }}</p>
-                </a>
-            </article>
-        {% endwith %}
-    {% endfor %}
  
 {% endblock %}
