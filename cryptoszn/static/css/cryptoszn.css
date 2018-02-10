@@ -1169,3 +1169,60 @@ footer {
     margin-right: 0;
     width: 100%;
 }
+
+.home_header {
+    background-color: transparent;
+}
+
+.home_header .wrapper {
+    margin-bottom: 140px;
+}
+
+.home_header h1 {
+	color: #3D3D3D;
+	font-size: 25px;	
+	font-weight: 700;
+}
+
+.home_header img {
+    width: 473px;
+    margin-right: 57px;
+}
+
+.home_header p {
+    color: #3D3D3D;
+    font-size: 16px;	
+    font-weight: 300;
+    margin-bottom: 54px;
+}
+
+.home_header nav {
+    height: auto;
+    background: transparent;
+}
+
+.home_header a {
+    color: #fff;
+    font-size: 14px;	
+    font-weight: 600;
+    border-radius: 2px;	
+    background-color: #21900C;
+    padding: 8px 11px;
+}
+
+.slanted_header {
+    transform: rotate(-1deg);
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    height: 468px;
+    width: 100%;
+    z-index: -1;
+}
+
+.all_news_button {
+    color: #155D08;
+    font-size: 14px;	
+    font-weight: 500;
+}

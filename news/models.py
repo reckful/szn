@@ -149,6 +149,9 @@ class ArticlePage(Page):
     # Empty list means that no child content types are allowed.
     subpage_types = []
     
+    def children(self):
+        return self.get_children().specific().live().order_by('-first_published_at')
+    
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
         context = super(ArticlePage, self).get_context(request)

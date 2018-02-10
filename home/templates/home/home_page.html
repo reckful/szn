@@ -1,7 +1,48 @@
 {% extends "base.html" %}
+{% load staticfiles %}
+{% load humanize %}
+
+{% load wagtailcore_tags wagtailimages_tags%}
 
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
-    <h1>Your cryptocurrency hub</h1>
+    <header class="home_header">
+        <div class="slanted_header"></div>
+        <div class="flex flex_align-items wrapper">
+            <img src="{% static "images/hash-rate.png" %}"></img>
+            <div>
+                <h1>Your cryptocurrency hub</h1>
+                <p>All news, announcements, ICOs and discussions in a beautiful,<br> convenient place. Un-biased, reliable, and regular.</p>
+                <nav>
+                    <a href="">Latest News</a>
+                    <a href="">Upcoming ICOs</a>
+                    <a href="">Market Movers</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main class="news_articles">
+        <div class="wrapper">
+            <div class="flex flex_align-items flex_justify-content">
+                <h2>Recent news</h2>
+                <a class="all_news_button" href="/news/">See all news</a>
+            </div>
+            <div class="recent_news flex flex_align-content flex_wrap">
+                {% for childpage in page.featured_section_3.specific.children|slice:"4" %}
+                    <article>
+                        <a href="{{childpage.url}}">
+                            {% image childpage.image fill-270x152-c50 as image %}
+                            <img src="{{ image.url }}"/>
+                            <h3>{{ childpage.title|truncatechars:75 }}</h3>
+                            <div class="flex flex_align-text">
+                                <p>{{ childpage.first_published_at|naturaltime }}</p>
+                                <p>{{ childpage.author|richtext }}</p>
+                            </div>
+                        </a>
+                    </article>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
 {% endblock %}
