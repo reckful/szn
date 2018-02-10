@@ -11,7 +11,14 @@ SECRET_KEY = '5q35)sa8^)a+*7*i-=#nzdnzyg6-g3^uhm_c^!1q!60^a*pr0n'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ALLOWED_HOSTS = ['cryptoszn-obdnc.c9users.io']
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
 
 try:
     from .local import *

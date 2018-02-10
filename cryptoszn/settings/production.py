@@ -15,6 +15,16 @@ ALLOWED_HOSTS = ['www.cryptoszn.com']
 SECURE_SSL_REDIRECT = True
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'pirrie$default',
+        'USER': 'pirrie',
+        'PASSWORD': 'lewisisgay123',
+        'HOST': 'pirrie.mysql.pythonanywhere-services.com',
+    }
+}
+
 try:
     from .local import *
 except ImportError:
