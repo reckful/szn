@@ -1,4 +1,4 @@
-base.py
-dev.py
-production.py
+/cryptoszn/cryptoszn/settings/base.py
+/cryptoszn/cryptoszn/settings/dev.py
+/cryptoszn/cryptoszn/settings/production.py
 db.sqlite3
