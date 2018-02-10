@@ -13,7 +13,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ALLOWED_HOSTS = ['www.cryptoszn.com']
 SECURE_SSL_REDIRECT = True
-
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 try:
     from .local import *
