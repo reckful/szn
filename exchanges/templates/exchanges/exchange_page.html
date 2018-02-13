@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load humanize %}
+
+{% load wagtailcore_tags wagtailimages_tags%}
+
+{% block body_class %}template-exchangepage{% endblock %}
+
+{% block content %}
+    {% image page.image width-133 height-120 %}
+    <a href="{{ page.ref_link }}">Start trading!</a>
+    {{ page.title }}
+    {{ page.body|richtext }}
+    {{ page.deposit|richtext }}{{page.withdrawal|richtext}}
+    {% for tag in page.get_tags  %}
+        <a href="/news/tags/{{tag|lower}}" class="btn btn-sm">{{ tag }}</a>
+    {% endfor %}
+    {{ page.fees }}
+{% endblock %}

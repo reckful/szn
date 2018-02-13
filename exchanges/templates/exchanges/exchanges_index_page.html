@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load humanize %}
+
+{% load wagtailcore_tags wagtailimages_tags%}
+
+{% block body_class %}template-exchangesindexpage{% endblock %}
+
+{% block content %}
+    {% for post in exchangepages %}
+        {% with post=post.specific %}
+            <a href="{% pageurl post %}">
+                {% image post.image fill-145x131-c50 as image %}
+                <img src="{{ image.url }}"/>
+                <h3>{{ post.title }}</h3>
+                {{ post.body|richtext|truncatechars:146 }}
+                {% for tag in post.get_tags|slice:":6" %}
+                    {{ tag }}
+                {% endfor %}
+            </a>
+        {% endwith %}
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load humanize %}
+
+{% load wagtailcore_tags wagtailimages_tags%}
+
+{% block body_class %}template-guidepage{% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+        <a class="flex flex_align-items" href="{{ page.get_parent.url }}"><svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 459 459"><path d="M178.5 140.25v-102L0 216.75l178.5 178.5V290.7c127.5 0 216.75 40.8 280.5 130.05-25.5-127.5-102-255-280.5-280.5z" fill="#21900c"/></svg>Back to guides</a>
+        {{ page.body }}
+    </div>
+{% endblock %}

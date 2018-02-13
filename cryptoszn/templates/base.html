@@ -29,7 +29,7 @@
         <title>
             {% block title %}
                 {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
-                {% if self.title == null %}{{ tag }} Articles - CryptoSZN{% endif %}
+                {% if self.title == null %}Filter{% endif %}
             {% endblock %}
             {% block title_suffix %}
                 - CryptoSZN
@@ -37,7 +37,7 @@
         </title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="shortcut icon" href="{%static 'images/sznicon.png' %}"/>
+        <link rel="shortcut icon" href="{%static 'images/favicon.png' %}"/>
 
         {# Global stylesheets #}
         <link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}">
@@ -95,7 +95,7 @@
             <nav>
                 <div class="wrapper flex flex_align-items flex_justify-content">
                     <a class="flex flex_align-items" href="/">
-                        <img class="logo" src="{% static "images/cryptosznlongs.png" %}" alt="CryptoSZN"/>
+                        <img class="logo" src="{% static "images/cryptoszn_new.png" %}" alt="CryptoSZN"/>
                     </a>
                     <ul class="main_nav flex flex_justify-content">
                         {% if request.get_full_path|slice:":5" == "/news" %}
@@ -105,16 +105,28 @@
                         {% endif %}
                                 <li>News</li>
                             </a>
-                        <a href="">
+                        {% if request.get_full_path|slice:":5" == "/icos" %}
+                            <a class="active" href="/icos">
+                        {% else %}
+                            <a href="/icos">
+                        {% endif %}
                             <li>ICOs</li>
                         </a>
                         <a href="">
                             <li>Coin tracking</li>
                         </a>
-                        <a href="">
+                        {% if request.get_full_path|slice:":7" == "/guides" %}
+                            <a class="active" href="/guides">
+                        {% else %}
+                            <a href="/guides">
+                        {% endif %}
                             <li>Guides</li>
                         </a>
-                        <a href="">
+                        {% if request.get_full_path|slice:":10" == "/exchanges" %}
+                            <a class="active" href="/exchanges">
+                        {% else %}
+                            <a href="/exchanges">
+                        {% endif %}
                             <li>Exchanges</li>
                         </a>
                         <a href="">
@@ -173,9 +185,9 @@
                         <li>
                             <p>Quick links</p>
                         </li>
-                        <li><a href="">News</a></li>
-                        <li><a href="">Upcoming ICOs</a></li>
-                        <li><a href="">Market movers</a></li>
+                        <li><a href="/news">News</a></li>
+                        <li><a href="/icos">Upcoming ICOs</a></li>
+                        <li><a href="/guides">Guides</a></li>
                     </ul>
                     <ul>
                         <li>
@@ -183,7 +195,7 @@
                         </li>
                         <li><a href="">Advertising</a></li>
                         <li><a href="">Submit ICO</a></li>
-                        <li><a href="">Affiliate program</a></li>
+                        <li><a href="">Submit Press Release</a></li>
                     </ul>
                     <ul>
                         <li>

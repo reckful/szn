@@ -17,21 +17,19 @@ from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
 from wagtail.wagtailcore.models import Page
 from django.shortcuts import redirect, render
 from django.contrib import messages
+from django.utils import timezone
 
 
-class NewsIndexPage(RoutablePageMixin, Page):
+class IcosIndexPage(RoutablePageMixin, Page):
     intro = RichTextField(blank=True)
-    header_text = models.CharField(blank=True, max_length=255)
-    
-    content_panels = Page.content_panels + [
-        FieldPanel('header_text'),
-    ]
-    
+
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
-        context = super(NewsIndexPage, self).get_context(request)
-        newspages = self.get_children().live().order_by('-first_published_at')
-        context['newspages'] = newspages
+        context = super(IcosIndexPage, self).get_context(request)
+        icopages = IcoPage.objects.live().order_by('date_end')
+        now = timezone.now()
+        context['icopages'] = icopages
+        context['now'] = now
         return context
         
     @route('^tags/$', name='tag_archive')
@@ -56,7 +54,7 @@ class NewsIndexPage(RoutablePageMixin, Page):
             'posts': posts,
             'tags': tags
         }
-        return render(request, 'news/news_index_page.html', context)
+        return render(request, 'icos/icos_index_page.html', context)
 
     def serve_preview(self, request, mode_name):
         # Needed for previews to work
@@ -66,7 +64,7 @@ class NewsIndexPage(RoutablePageMixin, Page):
         return self.get_children().specific().live()
         
     def get_posts(self, tag=None):
-        posts = ArticlePage.objects.live().descendant_of(self)
+        posts = IcoPage.objects.live().descendant_of(self)
         if tag:
             posts = posts.filter(tags=tag)
         return posts
@@ -84,51 +82,38 @@ class NewsIndexPage(RoutablePageMixin, Page):
 # ... (Keep the definition of NewsIndexPage)
 
 
-class ArticlePageTag(TaggedItemBase):
-    content_object = ParentalKey('ArticlePage', related_name='tagged_items')
+class IcoPageTag(TaggedItemBase):
+    content_object = ParentalKey('IcoPage', related_name='tagged_items')
 
 
 # Keep the definition of NewsIndexPage, and add:
 
 
-class ArticlePage(Page):
+class IcoPage(Page):
     date = models.DateField("Post date")
-    body = RichTextField(blank=True)
-    coin_one = models.CharField(max_length=250, blank=True)
-    coin_two = models.CharField(max_length=250, blank=True)
-    coin_three = models.CharField(max_length=250, blank=True)
-    coin_four = models.CharField(max_length=250, blank=True)
-    tags = ClusterTaggableManager(through=ArticlePageTag, blank=True)
-    featured = models.BooleanField(default=False, blank=True)
-    author = RichTextField(blank=True)
-    image = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+',
-        help_text='Landscape mode only; horizontal width between 1000px and 3000px.'
-    )
-
+    date_start = models.DateTimeField("Date start", blank=True)
+    date_end = models.DateTimeField("Date end", blank=True)
+    pre_ico = models.BooleanField(default=False, blank=True)
+    description = models.CharField(blank=True, max_length=255)
+    website = models.CharField(blank=True, max_length=255)
+    whitepaper = models.CharField(blank=True, max_length=255)
+    tags = ClusterTaggableManager(through=IcoPageTag, blank=True)
+    featured_ico = models.BooleanField(blank=True)
     search_fields = Page.search_fields + [
-        index.SearchField('body'),
+        index.SearchField('description'),
     ]
 
     content_panels = Page.content_panels + [
         MultiFieldPanel([
             FieldPanel('date'),
-            FieldPanel('tags'),
-            FieldPanel('featured'),
-            FieldPanel('author'),
-        ], heading="Article information"),
-        ImageChooserPanel('image'),
-        FieldPanel('body'),
-        MultiFieldPanel([
-            FieldPanel('coin_one'),
-            FieldPanel('coin_two'),
-            FieldPanel('coin_three'),
-            FieldPanel('coin_four'),
-        ], heading="Coins mentioned"),
+            FieldPanel('date_start'),
+            FieldPanel('date_end'),
+            FieldPanel('pre_ico'),
+            FieldPanel('description'),
+            FieldPanel('whitepaper'),
+            FieldPanel('website'),
+            FieldPanel('featured_ico'),
+        ], heading="ICO information"),
     ]
     
     @property
@@ -148,7 +133,7 @@ class ArticlePage(Page):
         return tags
 
     # Specifies parent to BlogPage as being BlogIndexPages
-    parent_page_types = ['NewsIndexPage']
+    parent_page_types = ['IcosIndexPage']
 
     # Specifies what content types can exist as children of BlogPage.
     # Empty list means that no child content types are allowed.
@@ -159,7 +144,8 @@ class ArticlePage(Page):
     
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
-        context = super(ArticlePage, self).get_context(request)
-        newspages = self.get_parent().get_children().live().order_by('-first_published_at')[:4]
-        context['newspages'] = newspages
+        context = super(IcoPage, self).get_context(request)
+        icopages = self.get_parent().get_children().live().order_by('-first_published_at')[:4]
+        context['icopages'] = icopages
         return context
+        

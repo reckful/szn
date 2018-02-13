@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load humanize %}
+
+{% load wagtailcore_tags wagtailimages_tags%}
+
+{% block body_class %}template-guidesindexpage{% endblock %}
+
+{% block content %}
+    {% if not posts %}
+        <nav class="wrapper guide_card">
+            <ul class="flex flex_align-items flex_wrap">
+                <a href="category/gettingstarted">
+                    <li class="flex flex_direction flex_align-items">
+                        <div>
+                            <img src="{% static "images/018-trading.png" %}"></img>
+                        </div>
+                        <h3>Getting started</h3>
+                        <p>We all start somewhere. Our getting started guides will help you grasp the concepts of cryptocurrency.</p>
+                        <div class="flex flex_align-items">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 423.253 423.253"><path d="M21.333 306.347V100.693c-7.253 1.92-14.507 4.267-21.333 6.4V366.72a274.99 274.99 0 0 1 173.44 8.96 200.531 200.531 0 0 0-142.293-59.52 10.027 10.027 0 0 1-9.814-9.813z"/><path d="M41.387 44.587l-.64 253.013a224.854 224.854 0 0 1 161.493 81.067v-241.28a213.33 213.33 0 0 0-160.853-92.8zM401.92 101.12v205.44a10.026 10.026 0 0 1-9.813 9.813 199.255 199.255 0 0 0-141.867 59.52v.213a274.565 274.565 0 0 1 173.013-9.387v-259.2c-6.826-2.346-13.866-4.692-21.333-6.399z"/><path d="M382.72 44.587a210.987 210.987 0 0 0-161.28 92.8v241.28A224.856 224.856 0 0 1 382.72 297.6V44.587z"/></svg>
+                            <p>{{ page.gettingstarted_count }} guides</p>
+                        </div>
+                    </li>
+                </a>
+                <a href="category/safety">
+                    <li class="flex flex_direction flex_align-items">
+                        <div>
+                            <img src="{% static "images/008-sha-2.png" %}"></img>
+                        </div>
+                        <h3>Safety & Security</h3>
+                        <p>Your assets and their safety is vital. These guides will help you learn how to best protect them.</p>
+                        <div class="flex flex_align-items">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 423.253 423.253"><path d="M21.333 306.347V100.693c-7.253 1.92-14.507 4.267-21.333 6.4V366.72a274.99 274.99 0 0 1 173.44 8.96 200.531 200.531 0 0 0-142.293-59.52 10.027 10.027 0 0 1-9.814-9.813z"/><path d="M41.387 44.587l-.64 253.013a224.854 224.854 0 0 1 161.493 81.067v-241.28a213.33 213.33 0 0 0-160.853-92.8zM401.92 101.12v205.44a10.026 10.026 0 0 1-9.813 9.813 199.255 199.255 0 0 0-141.867 59.52v.213a274.565 274.565 0 0 1 173.013-9.387v-259.2c-6.826-2.346-13.866-4.692-21.333-6.399z"/><path d="M382.72 44.587a210.987 210.987 0 0 0-161.28 92.8v241.28A224.856 224.856 0 0 1 382.72 297.6V44.587z"/></svg>
+                            <p>{{ page.safety_count }} guides</p>
+                        </div>
+                    </li>
+                </a>
+                <a href="category/trading">
+                    <li class="flex flex_direction flex_align-items">
+                        <div>
+                            <img src="{% static "images/005-stocks.png" %}"></img>
+                        </div>
+                        <h3>Trading & Exchanges</h3>
+                        <p>Exchanges can be a daunting place. Follow thse guides to learn how they work, and how to trade.</p>
+                        <div class="flex flex_align-items">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 423.253 423.253"><path d="M21.333 306.347V100.693c-7.253 1.92-14.507 4.267-21.333 6.4V366.72a274.99 274.99 0 0 1 173.44 8.96 200.531 200.531 0 0 0-142.293-59.52 10.027 10.027 0 0 1-9.814-9.813z"/><path d="M41.387 44.587l-.64 253.013a224.854 224.854 0 0 1 161.493 81.067v-241.28a213.33 213.33 0 0 0-160.853-92.8zM401.92 101.12v205.44a10.026 10.026 0 0 1-9.813 9.813 199.255 199.255 0 0 0-141.867 59.52v.213a274.565 274.565 0 0 1 173.013-9.387v-259.2c-6.826-2.346-13.866-4.692-21.333-6.399z"/><path d="M382.72 44.587a210.987 210.987 0 0 0-161.28 92.8v241.28A224.856 224.856 0 0 1 382.72 297.6V44.587z"/></svg>
+                            <p>{{ page.trading_count }} guides</p>
+                        </div>
+                    </li>
+                </a>
+                <a href="category/mining">
+                    <li class="flex flex_direction flex_align-items">
+                        <div>
+                            <img src="{% static "images/064-bitcoin-3.png" %}"></img>
+                        </div>
+                        <h3>Mining</h3>
+                        <p>There is money to be made mining. Our guides will teach you the most efficient and effective ways to mine coins.</p>
+                        <div class="flex flex_align-items">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 423.253 423.253"><path d="M21.333 306.347V100.693c-7.253 1.92-14.507 4.267-21.333 6.4V366.72a274.99 274.99 0 0 1 173.44 8.96 200.531 200.531 0 0 0-142.293-59.52 10.027 10.027 0 0 1-9.814-9.813z"/><path d="M41.387 44.587l-.64 253.013a224.854 224.854 0 0 1 161.493 81.067v-241.28a213.33 213.33 0 0 0-160.853-92.8zM401.92 101.12v205.44a10.026 10.026 0 0 1-9.813 9.813 199.255 199.255 0 0 0-141.867 59.52v.213a274.565 274.565 0 0 1 173.013-9.387v-259.2c-6.826-2.346-13.866-4.692-21.333-6.399z"/><path d="M382.72 44.587a210.987 210.987 0 0 0-161.28 92.8v241.28A224.856 224.856 0 0 1 382.72 297.6V44.587z"/></svg>
+                            <p>{{ page.mining_count }} guides</p>
+                        </div>
+                    </li>
+                </a>
+                <a href="category/utilising">
+                    <li class="flex flex_direction flex_align-items">
+                        <div>
+                            <img src="{% static "images/016-payment-method.png" %}"></img>
+                        </div>
+                        <h3>Paying with crypto</h3>
+                        <p>Want to actually utilise your crypto? Here you can learn who accepts crypto and how to safely do transactions.</p>
+                        <div class="flex flex_align-items">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 423.253 423.253"><path d="M21.333 306.347V100.693c-7.253 1.92-14.507 4.267-21.333 6.4V366.72a274.99 274.99 0 0 1 173.44 8.96 200.531 200.531 0 0 0-142.293-59.52 10.027 10.027 0 0 1-9.814-9.813z"/><path d="M41.387 44.587l-.64 253.013a224.854 224.854 0 0 1 161.493 81.067v-241.28a213.33 213.33 0 0 0-160.853-92.8zM401.92 101.12v205.44a10.026 10.026 0 0 1-9.813 9.813 199.255 199.255 0 0 0-141.867 59.52v.213a274.565 274.565 0 0 1 173.013-9.387v-259.2c-6.826-2.346-13.866-4.692-21.333-6.399z"/><path d="M382.72 44.587a210.987 210.987 0 0 0-161.28 92.8v241.28A224.856 224.856 0 0 1 382.72 297.6V44.587z"/></svg>
+                            <p>{{ page.utilising_count }} guides</p>
+                        </div>
+                    </li>
+                </a>
+                <a href="category/miscellaneous">
+                    <li class="flex flex_direction flex_align-items">
+                        <div>
+                            <img src="{% static "images/029-ico.png" %}"></img>
+                        </div>
+                        <h3>Miscellaneous</h3>
+                        <p>There's too much going on in the crypto world to categorise it all! Here you will find guides for everything else.</p>
+                        <div class="flex flex_align-items">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 423.253 423.253"><path d="M21.333 306.347V100.693c-7.253 1.92-14.507 4.267-21.333 6.4V366.72a274.99 274.99 0 0 1 173.44 8.96 200.531 200.531 0 0 0-142.293-59.52 10.027 10.027 0 0 1-9.814-9.813z"/><path d="M41.387 44.587l-.64 253.013a224.854 224.854 0 0 1 161.493 81.067v-241.28a213.33 213.33 0 0 0-160.853-92.8zM401.92 101.12v205.44a10.026 10.026 0 0 1-9.813 9.813 199.255 199.255 0 0 0-141.867 59.52v.213a274.565 274.565 0 0 1 173.013-9.387v-259.2c-6.826-2.346-13.866-4.692-21.333-6.399z"/><path d="M382.72 44.587a210.987 210.987 0 0 0-161.28 92.8v241.28A224.856 224.856 0 0 1 382.72 297.6V44.587z"/></svg>
+                            <p>{{ page.miscellaneous }} guides</p>
+                        </div>
+                    </li>
+                </a>
+            </ul>
+        </nav>
+    {% endif %}
+    
+    {% if posts %}
+        <main class="news_articles">
+            <div class="wrapper">
+                {% if request.get_full_path|slice:":28" == "/guides/tags/gettingstarted/" %}
+                    <h2>Getting Started Guides</h2>
+                {% elif request.get_full_path|slice:":20" == "/guides/tags/safety/" %}
+                    <h2>Safety & Security Guides</h2>
+                {% elif request.get_full_path|slice:":21" == "/guides/tags/trading/" %}
+                    <h2>Trading & Exchanges Guides</h2>
+                {% elif request.get_full_path|slice:":20" == "/guides/tags/mining/" %}
+                    <h2>Mining Guides</h2>
+                {% elif request.get_full_path|slice:":23" == "/guides/tags/utilising/" %}
+                    <h2>Utilising Crypto Guides</h2>
+                {% elif request.get_full_path|slice:":27" == "/guides/tags/miscellaneous/" %}
+                    <h2>Miscellaneous Guides</h2>
+                {% endif %}
+                <div class="recent_news flex flex_align-content flex_wrap">
+                    {% for page in posts %}
+                        <article>
+                            <a href="{% pageurl page %}">
+                                {% image page.image fill-270x152-c50 as image %}
+                                <img src="{{ image.url }}"/>
+                                <div class="flex flex_align-items flex_justify-content">
+                                    <p>{{ page.length }}</p>
+                                    <h3>{{ page.title|truncatechars:75 }}</h3>
+                                </div>
+                            </a>
+                        </article>
+                    {% endfor %}
+                </div>
+            </div>
+        </main>
+    {% endif %}
+{% endblock %}

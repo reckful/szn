@@ -50,7 +50,7 @@
         </aside>
         <nav class="related_news">
             <p class="recent_news_header">Recent articles</p>
-            <div class="recent_news flex flex_align-content flex_direction">
+            <div class="recent_news flex flex_align-content flex_direction flex_wrap">
                 {% for post in newspages %}
                     {% with post=post.specific %}
                         {% if post != page %}

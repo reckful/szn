@@ -9,9 +9,16 @@ from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import Tag, TaggedItemBase
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+
+from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtailcore import blocks
+from wagtail.wagtailimages.blocks import ImageChooserBlock
+from wagtail.wagtailcore.blocks import RawHTMLBlock
+from wagtail.wagtailcore.blocks import BlockQuoteBlock
+from wagtail.wagtailembeds.blocks import EmbedBlock
 
 from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
 from wagtail.wagtailcore.models import Page
@@ -19,30 +26,40 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 
 
-class NewsIndexPage(RoutablePageMixin, Page):
+class GuidesIndexPage(RoutablePageMixin, Page):
     intro = RichTextField(blank=True)
-    header_text = models.CharField(blank=True, max_length=255)
+    gettingstarted_count = models.CharField(blank=True, max_length=15)
+    safety_count = models.CharField(blank=True, max_length=15)
+    trading_count = models.CharField(blank=True, max_length=15)
+    mining_count = models.CharField(blank=True, max_length=15)
+    utilising_count = models.CharField(blank=True, max_length=15)
+    miscellaneous = models.CharField(blank=True, max_length=15)
     
     content_panels = Page.content_panels + [
-        FieldPanel('header_text'),
+       FieldPanel('gettingstarted_count'),
+       FieldPanel('safety_count'),
+       FieldPanel('trading_count'),
+       FieldPanel('mining_count'),
+       FieldPanel('utilising_count'),
+       FieldPanel('miscellaneous'),
     ]
-    
+
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
-        context = super(NewsIndexPage, self).get_context(request)
-        newspages = self.get_children().live().order_by('-first_published_at')
-        context['newspages'] = newspages
+        context = super(GuidesIndexPage, self).get_context(request)
+        guidespages = self.get_children().live().order_by('first_published_at')
+        context['guidespages'] = guidespages
         return context
         
-    @route('^tags/$', name='tag_archive')
-    @route('^tags/(\w+)/$', name='tag_archive')
+    @route('^category/$', name='tag_archive')
+    @route('^category/(\w+)/$', name='tag_archive')
     def tag_archive(self, request, tag=None):
 
         try:
             tag = Tag.objects.get(slug=tag)
         except Tag.DoesNotExist:
             if tag:
-                msg = 'There are no articles mentioning the coin"{}"'.format(tag).upper()
+                msg = 'There are no guides mentioning the coin"{}"'.format(tag).upper()
                 messages.add_message(request, messages.INFO, msg)
             return redirect(self.url)
 
@@ -56,7 +73,7 @@ class NewsIndexPage(RoutablePageMixin, Page):
             'posts': posts,
             'tags': tags
         }
-        return render(request, 'news/news_index_page.html', context)
+        return render(request, 'guides/guides_index_page.html', context)
 
     def serve_preview(self, request, mode_name):
         # Needed for previews to work
@@ -66,7 +83,7 @@ class NewsIndexPage(RoutablePageMixin, Page):
         return self.get_children().specific().live()
         
     def get_posts(self, tag=None):
-        posts = ArticlePage.objects.live().descendant_of(self)
+        posts = GuidePage.objects.live().descendant_of(self)
         if tag:
             posts = posts.filter(tags=tag)
         return posts
@@ -81,26 +98,18 @@ class NewsIndexPage(RoutablePageMixin, Page):
         return tags
 
 
-# ... (Keep the definition of NewsIndexPage)
+# ... (Keep the definition of GuidesIndexPage)
 
 
-class ArticlePageTag(TaggedItemBase):
-    content_object = ParentalKey('ArticlePage', related_name='tagged_items')
+class GuidePageTag(TaggedItemBase):
+    content_object = ParentalKey('GuidePage', related_name='tagged_items')
 
 
-# Keep the definition of NewsIndexPage, and add:
+# Keep the definition of GuidesIndexPage, and add:
 
 
-class ArticlePage(Page):
+class GuidePage(Page):
     date = models.DateField("Post date")
-    body = RichTextField(blank=True)
-    coin_one = models.CharField(max_length=250, blank=True)
-    coin_two = models.CharField(max_length=250, blank=True)
-    coin_three = models.CharField(max_length=250, blank=True)
-    coin_four = models.CharField(max_length=250, blank=True)
-    tags = ClusterTaggableManager(through=ArticlePageTag, blank=True)
-    featured = models.BooleanField(default=False, blank=True)
-    author = RichTextField(blank=True)
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -109,26 +118,26 @@ class ArticlePage(Page):
         related_name='+',
         help_text='Landscape mode only; horizontal width between 1000px and 3000px.'
     )
-
+    tags = ClusterTaggableManager(through=GuidePageTag, blank=True)
+    body = StreamField([
+        ('heading', blocks.CharBlock(classname="full title")),
+        ('paragraph', blocks.RichTextBlock()),
+        ('image', ImageChooserBlock()),
+        ('rawhtml', RawHTMLBlock()),
+        ('quote', BlockQuoteBlock()),
+        ('embed', EmbedBlock()),
+    ])
+    length = models.CharField("Length of guide", blank=True, max_length=20)
     search_fields = Page.search_fields + [
         index.SearchField('body'),
     ]
 
     content_panels = Page.content_panels + [
-        MultiFieldPanel([
-            FieldPanel('date'),
-            FieldPanel('tags'),
-            FieldPanel('featured'),
-            FieldPanel('author'),
-        ], heading="Article information"),
-        ImageChooserPanel('image'),
-        FieldPanel('body'),
-        MultiFieldPanel([
-            FieldPanel('coin_one'),
-            FieldPanel('coin_two'),
-            FieldPanel('coin_three'),
-            FieldPanel('coin_four'),
-        ], heading="Coins mentioned"),
+       FieldPanel('date'),
+       StreamFieldPanel('body'),
+       FieldPanel('tags'),
+       ImageChooserPanel('image'),
+       FieldPanel('length'),
     ]
     
     @property
@@ -148,7 +157,7 @@ class ArticlePage(Page):
         return tags
 
     # Specifies parent to BlogPage as being BlogIndexPages
-    parent_page_types = ['NewsIndexPage']
+    parent_page_types = ['GuidesIndexPage']
 
     # Specifies what content types can exist as children of BlogPage.
     # Empty list means that no child content types are allowed.
@@ -159,7 +168,7 @@ class ArticlePage(Page):
     
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
-        context = super(ArticlePage, self).get_context(request)
-        newspages = self.get_parent().get_children().live().order_by('-first_published_at')[:4]
-        context['newspages'] = newspages
+        context = super(GuidePage, self).get_context(request)
+        guidespages = self.get_parent().get_children().live().order_by('-first_published_at')[:4]
+        context['guidespages'] = guidespages
         return context

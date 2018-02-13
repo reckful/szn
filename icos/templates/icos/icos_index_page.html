@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load humanize %}
+
+{% load wagtailcore_tags %}
+
+
+{% block body_class %}template-icosindexpage{% endblock %}
+
+{% block content %}
+
+    <main class="wrapper">
+        <div class="flex flex_align-items">
+            <p class="ico_button ico_button_active">Pre-ICOs</p>
+            <p class="ico_button">ICOs</p>
+        </div>
+        <div class="ico_time_buttons flex flex_align-items">
+            <p class="ico_button ico_button_active">Active</p>
+            <p class="ico_button">Upcoming</p>
+            <p class="ico_button">Concluded</p>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Name</th>
+                    <th colspan="3">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--PRE ICO-->
+                {% for post in icopages %}
+                    {% with post=post.specific %}
+                        {% if post.pre_ico == True %}
+                            {% if post.date_start <= now %}
+                                <tr>
+                                    <td>{{ post.date_end|timeuntil }} left</td>
+                                    <td>{{ post.title }}</td>
+                                    <td>{{ post.description }}</td>
+                                    <td><a href="{{ post.website }}">Whitepaper</a></td>
+                                    <td><a href="{{ post.whitepaper }}">Website</a></td>
+                                </tr>
+                            {% endif %}
+                        {% endif %}
+                    {% endwith %}
+                {% endfor %}
+            </tbody>
+        </table>
+        <!--PRE ICO-->
+            <!--Active-->
+                <!--{% for post in icopages %}-->
+                <!--    {% with post=post.specific %}-->
+                <!--        {% if post.pre_ico == True %}-->
+                <!--            {% if post.date_start <= now %}-->
+                <!--                {{ post.date_end|naturaltime }}-->
+                <!--                {{ post.title }}-->
+                <!--                {{ post.description }}-->
+                <!--                {{ post.website }}-->
+                <!--                {{ post.whitepaper }}-->
+                <!--            {% endif %}-->
+                <!--        {% endif %}-->
+                <!--    {% endwith %}-->
+                <!--{% endfor %}-->
+            <!--Upcoming-->
+                <!--{% for post in icopages %}-->
+                <!--    {% with post=post.specific %}-->
+                <!--        {% if post.pre_ico == True %}-->
+                <!--            {{ post.date_active|naturaltime }}-->
+                <!--            {{ post.title }}-->
+                <!--            {{ post.description }}-->
+                <!--            {{ post.website }}-->
+                <!--            {{ post.whitepaper }}-->
+                <!--        {% endif %}-->
+                <!--    {% endwith %}-->
+                <!--{% endfor %}-->
+        
+        <!--NORMAL ICO-->
+        <!--{% for post in icopages %}-->
+        <!--    {% with post=post.specific %}-->
+        <!--        {% if post.pre_ico == False %}-->
+        <!--            {{ post.date_active|naturaltime }}-->
+        <!--            {{ post.title }}-->
+        <!--            {{ post.description }}-->
+        <!--            {{ post.website }}-->
+        <!--            {{ post.whitepaper }}-->
+        <!--        {% endif %}-->
+        <!--    {% endwith %}-->
+        <!--{% endfor %}-->
+    </main>
+
+{% endblock %}
