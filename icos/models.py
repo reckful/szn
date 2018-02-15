@@ -26,9 +26,11 @@ class IcosIndexPage(RoutablePageMixin, Page):
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
         context = super(IcosIndexPage, self).get_context(request)
-        icopages = IcoPage.objects.live().order_by('date_end')
+        icopages = IcoPage.objects.live().filter(featured_ico=False).order_by('date_end')
+        featuredicos = IcoPage.objects.live().filter(featured_ico=True).order_by('date_end')
         now = timezone.now()
         context['icopages'] = icopages
+        context['featuredicos'] = featuredicos
         context['now'] = now
         return context
         
@@ -148,4 +150,3 @@ class IcoPage(Page):
         icopages = self.get_parent().get_children().live().order_by('-first_published_at')[:4]
         context['icopages'] = icopages
         return context
-        

@@ -28,6 +28,22 @@
                 </tr>
             </thead>
             <tbody>
+                <!--FEATURED PRE ICO-->
+                {% for post in featuredicos %}
+                    {% with post=post.specific %}
+                        {% if post.pre_ico == True %}
+                            {% if post.date_start <= now %}
+                                <tr class="featured_ico">
+                                    <td>{{ post.date_end|timeuntil }} left</td>
+                                    <td>{{ post.title }} (FEATURED)</td>
+                                    <td>{{ post.description }}</td>
+                                    <td><a href="{{ post.website }}">Whitepaper</a></td>
+                                    <td><a href="{{ post.whitepaper }}">Website</a></td>
+                                </tr>
+                            {% endif %}
+                        {% endif %}
+                    {% endwith %}
+                {% endfor %}
                 <!--PRE ICO-->
                 {% for post in icopages %}
                     {% with post=post.specific %}

@@ -8,9 +8,11 @@
 {% block body_class %}template-exchangesindexpage{% endblock %}
 
 {% block content %}
-    {% for post in exchangepages %}
+    <!--FEATURED EXCHANGES-->
+    {% for post in featuredexchanges %}
         {% with post=post.specific %}
             <a href="{% pageurl post %}">
+                <h1>FEATURED</h1>
                 {% image post.image fill-145x131-c50 as image %}
                 <img src="{{ image.url }}"/>
                 <h3>{{ post.title }}</h3>
@@ -19,6 +21,22 @@
                     {{ tag }}
                 {% endfor %}
             </a>
+        {% endwith %}
+    {% endfor %}
+    <!--STANDARD EXCHANGES-->
+    {% for post in exchangepages %}
+        {% with post=post.specific %}
+            {% if post.featured == False %}
+                <a href="{% pageurl post %}">
+                    {% image post.image fill-145x131-c50 as image %}
+                    <img src="{{ image.url }}"/>
+                    <h3>{{ post.title }}</h3>
+                    {{ post.body|richtext|truncatechars:146 }}
+                    {% for tag in post.get_tags|slice:":6" %}
+                        {{ tag }}
+                    {% endfor %}
+                </a>
+            {% endif %}
         {% endwith %}
     {% endfor %}
 {% endblock %}

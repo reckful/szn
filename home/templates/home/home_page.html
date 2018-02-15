@@ -13,11 +13,11 @@
             <img src="{% static "images/hash-rate.png" %}"></img>
             <div>
                 <h1>Your cryptocurrency hub</h1>
-                <p>All news, announcements, ICOs and discussions in a beautiful,<br> convenient place. Un-biased, reliable, and regular.</p>
+                <p>All news, announcements, ICOs, guides & more in a beautiful,<br> convenient place. Un-biased, reliable, and regular.</p>
                 <nav>
                     <a href="/news">Latest News</a>
-                    <a href="/icos">Upcoming ICOs</a>
-                    <a href="">Market Movers</a>
+                    <a href="/icos">Active ICOs</a>
+                    <a href="/guides">Learn More</a>
                 </nav>
             </div>
         </div>
@@ -29,20 +29,23 @@
                 <a class="all_news_button" href="/news/">See all news</a>
             </div>
             <div class="recent_news flex flex_align-content flex_wrap">
-                {% for childpage in page.featured_section_3.specific.children|slice:"4" %}
-                    <article>
-                        <a href="{{childpage.url}}">
-                            {% image childpage.image fill-270x152-c50 as image %}
-                            <img src="{{ image.url }}"/>
-                            <h3>{{ childpage.title|truncatechars:75 }}</h3>
-                            <div class="flex flex_align-text">
-                                <p>{{ childpage.first_published_at|naturaltime }}</p>
-                                <p>{{ childpage.author|richtext }}</p>
-                            </div>
-                        </a>
-                    </article>
+                {% for post in newspages|slice:"4" %}
+                    {% with post=post.specific %}
+                        <article>
+                            <a href="{% pageurl post %}">
+                                {% image post.image fill-270x152-c50 as image %}
+                                <img src="{{ image.url }}"/>
+                                <h3>{{ post.title|truncatechars:75 }}</h3>
+                                <div class="flex flex_align-text">
+                                    <p>{{ post.first_published_at|naturaltime }}</p>
+                                    <p>{{ post.author|richtext }}</p>
+                                </div>
+                            </a>
+                        </article>
+                    {% endwith %}
                 {% endfor %}
             </div>
         </div>
     </main>
 {% endblock %}
+

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load humanize %}
+
+{% load wagtailcore_tags wagtailimages_tags%}
+
+{% block body_class %}template-standardpage{% endblock %}
+
+{% block content %}
+    {{ page.body }}
+{% endblock %}

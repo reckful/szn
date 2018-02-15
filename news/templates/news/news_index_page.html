@@ -224,7 +224,7 @@
     </nav>
     
     <!--FEATURED CARD-->
-    {% if not tag %}
+    {% if not tag and not releases %}
         <main class="news_articles">
             <div class="wrapper">
                 <div class="news_featured">
@@ -240,7 +240,7 @@
                                         <div class="featured_info">
                                             <h1>{{ page.header_text }}</h1>
                                             <h3>{{ post.title }}</h3>
-                                            {{ post.body|truncatechars:240|richtext }}
+                                            {{ post.preview_text|truncatechars:240|richtext }}
                                             <a class="button" href="{% pageurl post %}">Read More</a>
                                         </div>
                                     </article>
@@ -249,7 +249,30 @@
                         {% endfor %}
                     {% endif %}
                 </div>
-                <h2>Most recent news</h2>
+                {% if pressreleases %}
+                    <div class="flex flex_align-items flex_justify-content">
+                        <h2>Press releases</h2>
+                        <a class="all_news_button" href="/news/press">See all press releases</a>
+                    </div>
+                    <div class="recent_news flex flex_align-content flex_wrap">
+                        {% for post in pressreleases|slice:":4" %}
+                            {% with post=post.specific %}
+                                <article>
+                                    <a href="{% pageurl post %}">
+                                        {% image post.image fill-270x152-c50 as image %}
+                                        <img src="{{ image.url }}"/>
+                                        <h3>{{ post.title|truncatechars:75 }}</h3>
+                                        <div class="flex flex_align-text">
+                                            <p>{{ post.first_published_at|naturaltime }}</p>
+                                            <p>{{ post.author|richtext }}</p>
+                                        </div>
+                                    </a>
+                                </article>
+                            {% endwith %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <h2>Recent news</h2>
                 <div class="recent_news flex flex_align-content flex_wrap">
                     {% for post in newspages %}
                         {% with post=post.specific %}
@@ -284,7 +307,30 @@
                                 <h3>{{ page.title|truncatechars:75 }}</h3>
                                 <div class="flex flex_align-text">
                                     <p>{{ page.first_published_at|naturaltime }}</p>
-                                    <p>By Uncle Ben</p>
+                                    <p>{{ post.author|richtext }}</p>
+                                </div>
+                            </a>
+                        </article>
+                    {% endfor %}
+                </div>
+            </div>
+        </main>
+    {% endif %}
+    
+    {% if releases %}
+        <main class="news_articles">
+            <div class="wrapper">
+                <h2>Viewing all press releases</h2>
+                <div class="recent_news flex flex_align-content flex_wrap">
+                    {% for page in releases %}
+                        <article>
+                            <a href="{% pageurl page %}">
+                                {% image page.image fill-270x152-c50 as image %}
+                                <img src="{{ image.url }}"/>
+                                <h3>{{ page.title|truncatechars:75 }}</h3>
+                                <div class="flex flex_align-text">
+                                    <p>{{ page.first_published_at|naturaltime }}</p>
+                                    <p>{{ page.author|richtext }}</p>
                                 </div>
                             </a>
                         </article>

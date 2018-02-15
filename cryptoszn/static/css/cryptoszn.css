@@ -241,19 +241,19 @@ nav {
     display: none;
 }
 
-#signup_button {
-    background: #21900C;
+#press_button {
+    background: #E7E7E7;
     border-radius: 2px;
     padding: 10px;
-    color: #fff;
+    color: #727272;
     margin-left: 12px;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 12px;
     transition: background 0.3s ease;
 }
 
-#signup_button:hover {
-    background: #1c780a;
+#press_button:hover {
+    background: #d8d8d8;
 }
 
 #menuToggle
@@ -1204,6 +1204,7 @@ table tr {
     background-color: #E7E7E7;
 }
 
+
 table tr:nth-child(2n) {
     background-color: #F4F4F4;
 }
@@ -1227,6 +1228,18 @@ table tr td:nth-child(3) {
 table tr td:nth-child(4) a, table tr td:nth-child(5) a {
     color: #434343;	
     font-weight: 600;
+}
+
+.featured_ico td {
+    color: #04610A !important;
+}
+
+.featured_ico td a {
+    color: #04610A !important;
+}
+
+.featured_ico td:nth-child(1) {
+    color: #096100 !important;
 }
 
 table td {
@@ -1485,6 +1498,28 @@ table td {
 .guide_card div p {
     color: #505050;	
     font-size: 12px;	
+    font-weight: 500;
+    margin: 0;
+    width: auto;
+}
+
+.guide_length {
+    border-radius: 8px;
+    background-color: #E7E7E7;
+    justify-content: center;
+    padding: 6px 18px 6px 14px;
+}
+
+.guide_length svg {
+    width: 17px;
+    fill: #505050;
+    margin-right: 10px;
+}
+
+.guide_length p {
+    padding: 0;
+    color: #505050;
+    font-size: 12px;
     font-weight: 500;
     margin: 0;
     width: auto;

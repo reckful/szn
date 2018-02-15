@@ -27,7 +27,9 @@ class ExchangesIndexPage(RoutablePageMixin, Page):
         # Update context to include only published posts, ordered by reverse-chron
         context = super(ExchangesIndexPage, self).get_context(request)
         exchangepages = self.get_children().live().order_by('-first_published_at')
+        featuredexchanges = ExchangePage.objects.live().filter(featured=True).order_by('-first_published_at')
         context['exchangepages'] = exchangepages
+        context['featuredexchanges'] = featuredexchanges
         return context
         
     @route('^tags/$', name='tag_archive')

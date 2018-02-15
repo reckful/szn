@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'icos',
     'guides',
     'exchanges',
+    'press',
     'wagtail.contrib.wagtailroutablepage',
 
     'wagtail.wagtailforms',
