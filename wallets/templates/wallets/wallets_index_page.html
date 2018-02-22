@@ -1,0 +1,483 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load humanize %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+
+{% block body_class %}template-walletsindexpage{% endblock %}
+
+{% block content %}
+    <nav class="news_sort">
+        <div class="wrapper">
+            <ul class="flex flex_align-items">
+                {% if request.get_full_path == "/wallets/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                        <a href="/wallets"><img src="{% static "images/coins_32x32/all.png" %}"></img></a>
+                    </li>
+                {% if request.get_full_path == "/wallets/coins/btc/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                        <a href="/wallets/coins/btc/"><img src="{% static "images/coins_32x32/btc.png" %}"></img></a>
+                    </li>
+                {% if request.get_full_path == "/wallets/coins/eth/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/eth/"><img src="{% static "images/coins_32x32/eth.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/wallets/coins/xrp/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/xrp/"><img src="{% static "images/coins_32x32/xrp.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/wallets/coins/bch/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/bch/"><img src="{% static "images/coins_32x32/bch.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/wallets/coins/ada/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/ada/"><img src="{% static "images/coins_32x32/ada.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/wallets/coins/xlm/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/xlm/"><img src="{% static "images/coins_32x32/xlm.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/wallets/coins/ltc/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/ltc/"><img src="{% static "images/coins_32x32/ltc.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/wallets/coins/neo/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/neo/"><img src="{% static "images/coins_32x32/neo.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/wallets/coins/eos/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/eos/"><img src="{% static "images/coins_32x32/eos.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/wallets/coins/nem/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/nem/"><img src="{% static "images/coins_32x32/nem.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/wallets/coins/iota/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/iota/"><img src="{% static "images/coins_32x32/iota.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/wallets/coins/dash/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/dash/"><img src="{% static "images/coins_32x32/dash.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/wallets/coins/xmr/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/xmr/"><img src="{% static "images/coins_32x32/xmr.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/wallets/coins/trx/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/trx/"><img src="{% static "images/coins_32x32/trx.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/wallets/coins/icx/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/icx/"><img src="{% static "images/coins_32x32/icx.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/wallets/coins/etc/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/etc/"><img src="{% static "images/coins_32x32/etc.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/wallets/coins/qtum/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/qtum/"><img src="{% static "images/coins_32x32/qtum.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/wallets/coins/btg/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/btg/"><img src="{% static "images/coins_32x32/btg.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/wallets/coins/ven/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/ven/"><img src="{% static "images/coins_32x32/ven.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/wallets/coins/lsk/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/lsk/"><img src="{% static "images/coins_32x32/lsk.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/wallets/coins/ppt/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/ppt/"><img src="{% static "images/coins_32x32/ppt.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/wallets/coins/xrb/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/xrb/"><img src="{% static "images/coins_32x32/xrb.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/wallets/coins/usdt/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/usdt/"><img src="{% static "images/coins_32x32/usdt.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/wallets/coins/omg/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/omg/"><img src="{% static "images/coins_32x32/omg.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/wallets/coins/steem/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/steem/"><img src="{% static "images/coins_32x32/steem.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/wallets/coins/zec/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/wallets/coins/zec/"><img src="{% static "images/coins_32x32/zec.png" %}"></img></a>
+                </li>
+                <li class="flex flex_align-items">
+                    <p>OTHER</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10" viewBox="0 0 292.362 292.362"><path d="M286.935 69.377c-3.614-3.617-7.898-5.424-12.848-5.424H18.274c-4.952 0-9.233 1.807-12.85 5.424C1.807 72.998 0 77.279 0 82.228c0 4.948 1.807 9.229 5.424 12.847l127.907 127.907c3.621 3.617 7.902 5.428 12.85 5.428s9.233-1.811 12.847-5.428L286.935 95.074c3.613-3.617 5.427-7.898 5.427-12.847 0-4.948-1.814-9.229-5.427-12.85z" fill="#d5d5d5"/></svg>
+                    <div class="dropdown_content">
+                        {% if posts %}
+                            <ul class="flex flex_align-center flex_direction flex_wrap">
+                                {% for tag in tags %}
+                                    <li><a href="/wallets/coins/{{ tag|lower }}">{{ tag }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        {% if page.get_child_tags %}
+                            <ul class="flex flex_align-center flex_direction flex_wrap">
+                                {% for tag in page.get_child_tags %}
+                                    <li><a href="/wallets/coins/{{ tag|lower }}">{{ tag }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    {% if not posts %}
+        <main class="wrapper">
+            <h2>Showing all wallets</h2>
+            <div class="flex flex_align-items flex_wrap">
+                <!-- FEATURED EXCHANGES -->
+                {% for post in sponsoredwallets %}
+                    {% with post=post.specific %}
+                        <a class="wallet_card wallet_card_featured flex flex_align-items" href="{% pageurl post %}">
+                            <article class="flex flex_align-items">
+                                <p class="Sponsored_pill">Sponsored</p>
+                                {% image post.image fill-110x110-c50 as image %}
+                                <img src="{{ image.url }}"/>
+                                <div>
+                                    <div class="wallet_title_container flex flex_align-items flex_justify-content">
+                                        <h3>{{ post.title }}</h3>
+                                        <div>
+                                            {% if post.webwallet %}
+                                                <img src="{% static "images/platforms/website.png" %}" alt="Web Wallet">
+                                            {% endif %}
+                                            {% if post.ios %}
+                                                <img src="{% static "images/platforms/appstore.png" %}" alt="iOS App">
+                                            {% endif %}
+                                            {% if post.hardware %}
+                                                <img src="{% static "images/platforms/hardware.png" %}" alt="Hardware">
+                                            {% endif %}
+                                            {% if post.android %}
+                                                <img src="{% static "images/platforms/android.png" %}" alt="Android App">
+                                            {% endif %}
+                                            {% if post.windows %}
+                                                <img src="{% static "images/platforms/windows.png" %}" alt="Windows">
+                                            {% endif %}
+                                            {% if post.linux %}
+                                                <img src="{% static "images/platforms/linux.png" %}" alt="Linux">
+                                            {% endif %}
+                                            {% if post.chrome %}
+                                                <img src="{% static "images/platforms/chrome.png" %}" alt="Chrome Extension">
+                                            {% endif %}
+                                            {% if post.macos %}
+                                                <img src="{% static "images/platforms/apple.png" %}" alt="macOS">
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="flex flex_align-items">
+                                        {% if post.safety == "1" %}
+                                            <div class="key_security flex flex_align-items">
+                                                <img src="{% static "images/safety/1.png" %}">
+                                                <p>You store your private keys.</p>
+                                            </div>
+                                        {% elif post.safety == "2" %}
+                                            <div class="key_security flex flex_align-items">
+                                                <img src="{% static "images/safety/2.png" %}">
+                                                <p>Your private keys are encrypted & stored by a third party.</p>
+                                            </div>
+                                        {% elif post.safety == "3" %}
+                                            <div class="key_security flex flex_align-items">
+                                                <img src="{% static "images/safety/3.png" %}">
+                                                <p>Private keys are stored by a third party and are easily accessible.</p>
+                                            </div>
+                                        {% endif %}
+                                        <div class="wallet_anonymity">
+                                            <p>Anonymity</p>
+                                            <p>{{ post.anonymity }}</p>
+                                        </div>
+                                        <div class="wallet_ease">
+                                            <p>Ease of use</p>
+                                            <p>{{ post.ease }}</p>
+                                        </div>
+                                    </div>
+                                    <ul>
+                                        {% for tag in post.get_tags|slice:":5" %}
+                                            <li>
+                                                {{ tag }}
+                                            </li>
+                                        {% endfor %}
+                                        {% if post.get_tags|length > 5 %}
+                                            <li class="coins_left_text">
+                                                +{{ post.get_tags|length|add:"-5" }} more
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </article>
+                        </a>
+                    {% endwith %}
+                {% endfor %}
+                <!-- STANDARD -->
+                {% for post in walletspages %}
+                    {% with post=post.specific %}
+                        <a class="wallet_card flex flex_align-items" href="{% pageurl post %}">
+                            <article class="flex flex_align-items">
+                                {% image post.image fill-110x110-c50 as image %}
+                                <img src="{{ image.url }}"/>
+                                <div>
+                                    <div class="wallet_title_container flex flex_align-items flex_justify-content">
+                                        <h3>{{ post.title }}</h3>
+                                        <div>
+                                            {% if post.webwallet %}
+                                                <img src="{% static "images/platforms/website.png" %}" alt="Web Wallet">
+                                            {% endif %}
+                                            {% if post.ios %}
+                                                <img src="{% static "images/platforms/appstore.png" %}" alt="iOS App">
+                                            {% endif %}
+                                            {% if post.hardware %}
+                                                <img src="{% static "images/platforms/hardware.png" %}" alt="Hardware">
+                                            {% endif %}
+                                            {% if post.android %}
+                                                <img src="{% static "images/platforms/android.png" %}" alt="Android App">
+                                            {% endif %}
+                                            {% if post.windows %}
+                                                <img src="{% static "images/platforms/windows.png" %}" alt="Windows">
+                                            {% endif %}
+                                            {% if post.linux %}
+                                                <img src="{% static "images/platforms/linux.png" %}" alt="Linux">
+                                            {% endif %}
+                                            {% if post.chrome %}
+                                                <img src="{% static "images/platforms/chrome.png" %}" alt="Chrome Extension">
+                                            {% endif %}
+                                            {% if post.macos %}
+                                                <img src="{% static "images/platforms/apple.png" %}" alt="macOS">
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="flex flex_align-items">
+                                        {% if post.safety == "1" %}
+                                            <div class="key_security flex flex_align-items">
+                                                <img src="{% static "images/safety/1.png" %}">
+                                                <p>You store your private keys.</p>
+                                            </div>
+                                        {% elif post.safety == "2" %}
+                                            <div class="key_security flex flex_align-items">
+                                                <img src="{% static "images/safety/2.png" %}">
+                                                <p>Your private keys are encrypted & stored by a third party.</p>
+                                            </div>
+                                        {% elif post.safety == "3" %}
+                                            <div class="key_security flex flex_align-items">
+                                                <img src="{% static "images/safety/3.png" %}">
+                                                <p>Private keys are stored by a third party and are easily accessible.</p>
+                                            </div>
+                                        {% endif %}
+                                        <div class="wallet_anonymity">
+                                            <p>Anonymity</p>
+                                            <p>{{ post.anonymity }}</p>
+                                        </div>
+                                        <div class="wallet_ease">
+                                            <p>Ease of use</p>
+                                            <p>{{ post.ease }}</p>
+                                        </div>
+                                    </div>
+                                    <ul class="flex flex_align-items">
+                                        {% for tag in post.get_tags|slice:":5" %}
+                                            <li>
+                                                {{ tag }}
+                                            </li>
+                                        {% endfor %}
+                                        {% if post.get_tags|length > 5 %}
+                                            <li class="coins_left_text">
+                                                +{{ post.get_tags|length|add:"-5" }} more
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </article>
+                        </a>
+                    {% endwith %}
+                {% endfor %}
+            </div>
+        </main>
+    {% endif %}
+    {% if posts %}
+        <main class="wrapper">
+            <h2>Viewing all wallets supporting <span class="coin_highlight">{{ tag }}</span></h2>
+            <div class="flex flex_align-items flex_wrap">
+                {% for page in posts %}
+                    {% if page.sponsored == True %}
+                        <a class="wallet_card wallet_card_featured flex flex_align-items" href="{% pageurl page %}">
+                        <p class="Sponsored_pill">Sponsored</p>
+                    {% else %}
+                       <a class="wallet_card flex flex_align-items" href="{% pageurl page %}">
+                    {% endif %}
+                        <article class="flex flex_align-items">
+                            {% image page.image fill-110x110-c50 as image %}
+                            <img src="{{ image.url }}"/>
+                            <div>
+                                <div class="wallet_title_container flex flex_align-items flex_justify-content">
+                                    <h3>{{ page.title }}</h3>
+                                    <div>
+                                        {% if page.webwallet %}
+                                            <img src="{% static "images/platforms/website.png" %}" alt="Web Wallet">
+                                        {% endif %}
+                                        {% if page.ios %}
+                                            <img src="{% static "images/platforms/appstore.png" %}" alt="iOS App">
+                                        {% endif %}
+                                        {% if page.hardware %}
+                                            <img src="{% static "images/platforms/hardware.png" %}" alt="Hardware">
+                                        {% endif %}
+                                        {% if page.android %}
+                                            <img src="{% static "images/platforms/android.png" %}" alt="Android App">
+                                        {% endif %}
+                                        {% if page.windows %}
+                                            <img src="{% static "images/platforms/windows.png" %}" alt="Windows">
+                                        {% endif %}
+                                        {% if page.linux %}
+                                            <img src="{% static "images/platforms/linux.png" %}" alt="Linux">
+                                        {% endif %}
+                                        {% if page.chrome %}
+                                            <img src="{% static "images/platforms/chrome.png" %}" alt="Chrome Extension">
+                                        {% endif %}
+                                        {% if page.macos %}
+                                            <img src="{% static "images/platforms/apple.png" %}" alt="macOS">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="flex flex_align-items">
+                                    {% if page.safety == "1" %}
+                                        <div class="key_security flex flex_align-items">
+                                            <img src="{% static "images/safety/1.png" %}">
+                                            <p>You store your private keys.</p>
+                                        </div>
+                                    {% elif page.safety == "2" %}
+                                        <div class="key_security flex flex_align-items">
+                                            <img src="{% static "images/safety/2.png" %}">
+                                            <p>Your private keys are encrypted & stored by a third party.</p>
+                                        </div>
+                                    {% elif page.safety == "3" %}
+                                        <div class="key_security flex flex_align-items">
+                                            <img src="{% static "images/safety/3.png" %}">
+                                            <p>Private keys are stored by a third party and are easily accessible.</p>
+                                        </div>
+                                    {% endif %}
+                                    <div class="wallet_anonymity">
+                                        <p>Anonymity</p>
+                                        <p>{{ page.anonymity }}</p>
+                                    </div>
+                                    <div class="wallet_ease">
+                                        <p>Ease of use</p>
+                                        <p>{{ page.ease }}</p>
+                                    </div>
+                                </div>
+                                <ul class="flex flex_align-items">
+                                    {% for tag in page.get_tags|slice:":5" %}
+                                        <li>
+                                            {{ tag }}
+                                        </li>
+                                    {% endfor %}
+                                    {% if page.get_tags|length > 5 %}
+                                        <li class="coins_left_text">
+                                            +{{ page.get_tags|length|add:"-5" }} more
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </article>
+                    </a>
+                {% endfor %}
+            </div>
+        </main>
+    {% endif %}
+{% endblock %}

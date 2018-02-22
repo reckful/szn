@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load humanize %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+
+{% block body_class %}template-walletpage{% endblock %}
+
+{% block content %}
+    <main class="wrapper flex">
+        <aside class="flex flex_direction ico_side_info">
+            <div class="flex flex_align-items">
+                {% image page.image fill-107x107-c50 as image %}
+                <img src="{{ image.url }}"/>
+            </div>
+            <a class="flex flex_align-items" href="{{ page.website }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41.999 41.999"><path d="M36.068 20.176l-29-20A1 1 0 1 0 5.5.999v40a1 1 0 0 0 1.568.823l29-20a.999.999 0 0 0 0-1.646z"/></svg>Visit website</a>
+        </aside>
+        <article class="wallet_main_info">
+            <h1>{{ page.title }}</h1>
+            <p class="wallet_titles">Platforms</p>
+            <ul class="flex flex_align-items">
+                {% if page.webwallet %}
+                    <li><img src="{% static "images/platforms/website.png" %}" alt="Web Wallet"></li>
+                {% endif %}
+                {% if page.ios %}
+                    <li><img src="{% static "images/platforms/appstore.png" %}" alt="iOS App"></li>
+                {% endif %}
+                {% if page.hardware %}
+                    <li><img src="{% static "images/platforms/hardware.png" %}" alt="Hardware"></li>
+                {% endif %}
+                {% if page.android %}
+                    <li><img src="{% static "images/platforms/android.png" %}" alt="Android App"></li>
+                {% endif %}
+                {% if page.windows %}
+                    <li><img src="{% static "images/platforms/windows.png" %}" alt="Windows"></li>
+                {% endif %}
+                {% if page.linux %}
+                    <li><img src="{% static "images/platforms/linux.png" %}" alt="Linux"></li>
+                {% endif %}
+                {% if page.chrome %}
+                    <li><img src="{% static "images/platforms/chrome.png" %}" alt="Chrome Extension"></li>
+                {% endif %}
+                {% if page.macos %}
+                    <li><img src="{% static "images/platforms/apple.png" %}" alt="macOS"></li>
+                {% endif %}
+            </ul>
+            <div class="flex flex_align-items">
+                {% if page.safety == "1" %}
+                    <img src="{% static "images/safety/1.png" %}">
+                    <p>You store your private keys.</p>
+                {% elif page.safety == "2" %}
+                    <img src="{% static "images/safety/2.png" %}">
+                    <p>Your private keys are encrypted & stored by a third party.</p>
+                {% elif page.safety == "3" %}
+                    <img src="{% static "images/safety/3.png" %}">
+                    <p>Private keys are stored by a third party and are easily accessible.</p>
+                {% endif %}
+                <div>
+                    <p class="wallet_titles">Anonymity</p>
+                    <p>{{ page.anonymity }}</p>
+                </div>
+                <div>
+                    <p class="wallet_titles">Ease of use</p>
+                    <p>{{ page.ease }}</p>
+                </div>
+            </div>
+            <p class="wallet_titles">Supported coins</p>
+            <ul class="flex flex_align-items">
+                {% for tag in page.get_tags %}
+                    <a href="/news/coins/{{tag|lower}}" class="btn btn-sm"><li>{{ tag }}</li></a>
+                {% endfor %}
+            </ul>
+            <p>About</p>
+            <p>{{ page.about|richtext }}</p>
+        </article>
+        <nav class="related_news">
+            <p class="recent_news_header">Recent articles</p>
+            <div class="recent_news flex flex_align-content flex_direction flex_wrap">
+                {% for post in newspages|slice:":4" %}
+                    {% with post=post.specific %}
+                        <article>
+                            <a href="{% pageurl post %}">
+                                {% image post.image fill-270x152-c50 as image %}
+                                <img src="{{ image.url }}"/>
+                                <h3>{{ post.title|truncatechars:75 }}</h3>
+                                <div class="flex flex_align-text">
+                                    <p>{{ post.first_published_at|naturaltime }}</p>
+                                    <p>{{ post.author|richtext }}</p>
+                                </div>
+                            </a>
+                        </article>
+                    {% endwith %}
+                {% endfor %}
+            </div>
+        </nav>
+    </main>
+{% endblock %}

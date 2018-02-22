@@ -19,6 +19,7 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.utils import timezone
 
+from news.models import ArticlePage
 
 class IcosIndexPage(RoutablePageMixin, Page):
     intro = RichTextField(blank=True)
@@ -42,7 +43,7 @@ class IcosIndexPage(RoutablePageMixin, Page):
             tag = Tag.objects.get(slug=tag)
         except Tag.DoesNotExist:
             if tag:
-                msg = 'There are no articles mentioning the coin"{}"'.format(tag).upper()
+                msg = 'There are no articles mentioning the coin"{}"'.format(tag.upper())
                 messages.add_message(request, messages.INFO, msg)
             return redirect(self.url)
 
@@ -96,11 +97,26 @@ class IcoPage(Page):
     date_start = models.DateTimeField("Date start", blank=True)
     date_end = models.DateTimeField("Date end", blank=True)
     pre_ico = models.BooleanField(default=False, blank=True)
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        help_text='Landscape mode only; horizontal width between 1000px and 3000px.'
+    )
     description = models.CharField(blank=True, max_length=255)
+    about = RichTextField(blank=True)
     website = models.CharField(blank=True, max_length=255)
     whitepaper = models.CharField(blank=True, max_length=255)
     tags = ClusterTaggableManager(through=IcoPageTag, blank=True)
     featured_ico = models.BooleanField(blank=True)
+    reddit = models.CharField(blank=True, max_length=255)
+    twitter = models.CharField(blank=True, max_length=255)
+    facebook = models.CharField(blank=True, max_length=255)
+    linkedin = models.CharField(blank=True, max_length=255)
+    instagram = models.CharField(blank=True, max_length=255)
+    telegram = models.CharField(blank=True, max_length=255)
     search_fields = Page.search_fields + [
         index.SearchField('description'),
     ]
@@ -110,12 +126,22 @@ class IcoPage(Page):
             FieldPanel('date'),
             FieldPanel('date_start'),
             FieldPanel('date_end'),
+            ImageChooserPanel('image'),
             FieldPanel('pre_ico'),
             FieldPanel('description'),
+            FieldPanel('about'),
             FieldPanel('whitepaper'),
             FieldPanel('website'),
             FieldPanel('featured_ico'),
         ], heading="ICO information"),
+        MultiFieldPanel([
+            FieldPanel('reddit'),
+            FieldPanel('twitter'),
+            FieldPanel('facebook'),
+            FieldPanel('linkedin'),
+            FieldPanel('instagram'),
+            FieldPanel('telegram'),
+        ], heading="ICO Links"),
     ]
     
     @property
@@ -147,6 +173,8 @@ class IcoPage(Page):
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
         context = super(IcoPage, self).get_context(request)
+        newspages = ArticlePage.objects.live().filter(press_release=False).order_by('-first_published_at')
         icopages = self.get_parent().get_children().live().order_by('-first_published_at')[:4]
+        context['newspages'] = newspages
         context['icopages'] = icopages
         return context

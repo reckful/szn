@@ -20,9 +20,11 @@
             {{ page.body }}
             
             <p class="article_date">Published: {{ page.first_published_at }}</p>
-            <p class="article_date">Last edited: {{ page.last_published_at|naturaltime }}</p>
+            {% if page.last_published_at != page.first_published_at %}
+                <p class="article_date">Last edited: {{ page.last_published_at|naturaltime }}</p>
+            {% endif %}
             {% if page.sponsored %}
-                <p>Disclaimer. CryptoSZN does not endorse any content or product on this page. While we aim at providing you all important information that we could obtain, readers should do their own research before taking any actions related to the company and carry full responsibility for their decisions, nor this article can be considered as an investment advice.</p>
+                <p><b>Disclaimer:</b> <i>CryptoSZN does not endorse any content or product on this page. While we aim at providing you all important information that we could obtain, readers should do their own research before taking any actions related to the company and carry full responsibility for their decisions, nor this article can be considered as an investment advice.</i></p>
             {% endif %}
             {% if page.press_release %}
                 <p>This is a paid press release. CryptoSZN does not endorse and is not responsible for or liable for any content, accuracy, quality, advertising, products or other materials on this page. Readers should do their own research before taking any actions related to the company. CryptoSZN is not responsible, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with the use of or reliance on any content, goods or services mentioned in the press release.</p>
@@ -61,11 +63,33 @@
             </aside>
         {% endif %}
         <nav class="related_news">
+            {% if relatedarticles|length != 1 %}
+                <p class="recent_news_header">Related articles</p>
+                <div class="recent_news flex flex_align-content flex_direction flex_wrap">
+                    {% for post in relatedarticles|slice:":4" %}
+                        {% with post=post.specific %}
+                            {% if post != page %}
+                                <article>
+                                    <a href="{% pageurl post %}">
+                                        {% image post.image fill-270x152-c50 as image %}
+                                        <img src="{{ image.url }}"/>
+                                        <h3>{{ post.title|truncatechars:75 }}</h3>
+                                        <div class="flex flex_align-text">
+                                            <p>{{ post.first_published_at|naturaltime }}</p>
+                                            <p>{{ post.author|richtext }}</p>
+                                        </div>
+                                    </a>
+                                </article>
+                            {% endif %}
+                        {% endwith %}
+                    {% endfor %}
+                </div>
+            {% endif %}
             <p class="recent_news_header">Recent articles</p>
             <div class="recent_news flex flex_align-content flex_direction flex_wrap">
-                {% for post in newspages %}
+                {% for post in newspages|slice:":4" %}
                     {% with post=post.specific %}
-                        {% if post != page %}
+                        {% if post != page and post not in relatedarticles %}
                             <article>
                                 <a href="{% pageurl post %}">
                                     {% image post.image fill-270x152-c50 as image %}

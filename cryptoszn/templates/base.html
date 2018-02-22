@@ -26,6 +26,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no" />
         <title>
             {% block title %}
                 {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
@@ -36,7 +37,6 @@
             {% endblock %}
         </title>
         <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="shortcut icon" href="{%static 'images/favicon.png' %}"/>
 
         {# Global stylesheets #}
@@ -129,7 +129,11 @@
                         {% endif %}
                             <li>Exchanges</li>
                         </a>
-                        <a href="">
+                        {% if request.get_full_path|slice:":8" == "/wallets" %}
+                            <a class="active" href="/wallets">
+                        {% else %}
+                            <a href="/wallets">
+                        {% endif %}
                             <li>Wallets</li>
                         </a>
                     </ul>
@@ -146,14 +150,13 @@
                             
                             <ul id="menu">
                                 <a href="/news"><li>News</li></a>
-                                <a href=""><li>ICOs</li></a>
+                                <a href="/icos"><li>ICOs</li></a>
                                 <a href=""><li>Coin tracking</li></a>
-                                <a href=""><li>Guides</li></a>
-                                <a href=""><li>Exchanges</li></a>
-                                <a href=""><li>Wallets</li></a>
+                                <a href="/guides"><li>Guides</li></a>
+                                <a href="/exchanges"><li>Exchanges</li></a>
+                                <a href="/wallets"><li>Wallets</li></a>
                             </ul>
-                          </div>                    
-                        <a class="user_dropdown" href=""><svg viewBox="373.3 133.3 533.3 533.3" id="icon_user" xmlns="http://www.w3.org/2000/svg" width="30px" height="30px"><path d="M640 400c73.6 0 133.3-59.7 133.3-133.3S713.6 133.3 640 133.3 506.7 193 506.7 266.7 566.4 400 640 400zm0 66.7c-89 0-266.7 44.7-266.7 133.3v66.7h533.3V600c.1-88.7-177.6-133.3-266.6-133.3z"></path></svg></a>    
+                        </div>                    
                     </div>
                 </div>
             </nav>
@@ -165,7 +168,6 @@
 
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/cryptoszn.js' %}"></script>
-
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}
         {% endblock %}
@@ -192,8 +194,8 @@
                         <li>
                             <p>Work with us</p>
                         </li>
-                        <li><a href="">Advertising</a></li>
-                        <li><a href="">Submit ICO</a></li>
+                        <li><a href="/advertising">Advertising</a></li>
+                        <li><a href="/submit-ico">Submit ICO</a></li>
                         <li><a href="/submit-press-release">Submit Press Release</a></li>
                     </ul>
                     <ul>

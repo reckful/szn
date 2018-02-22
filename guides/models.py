@@ -59,7 +59,7 @@ class GuidesIndexPage(RoutablePageMixin, Page):
             tag = Tag.objects.get(slug=tag)
         except Tag.DoesNotExist:
             if tag:
-                msg = 'There are no guides mentioning the coin"{}"'.format(tag).upper()
+                msg = 'There are no guides in this category.'
                 messages.add_message(request, messages.INFO, msg)
             return redirect(self.url)
 

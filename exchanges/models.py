@@ -19,6 +19,7 @@ from wagtail.wagtailcore.models import Page
 from django.shortcuts import redirect, render
 from django.contrib import messages
 
+from news.models import ArticlePage
 
 class ExchangesIndexPage(RoutablePageMixin, Page):
     intro = RichTextField(blank=True)
@@ -26,21 +27,21 @@ class ExchangesIndexPage(RoutablePageMixin, Page):
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
         context = super(ExchangesIndexPage, self).get_context(request)
-        exchangepages = self.get_children().live().order_by('-first_published_at')
+        exchangepages = ExchangePage.objects.live().filter(featured=False).order_by('-first_published_at')
         featuredexchanges = ExchangePage.objects.live().filter(featured=True).order_by('-first_published_at')
         context['exchangepages'] = exchangepages
         context['featuredexchanges'] = featuredexchanges
         return context
         
-    @route('^tags/$', name='tag_archive')
-    @route('^tags/(\w+)/$', name='tag_archive')
+    @route('^coins/$', name='tag_archive')
+    @route('^coins/(\w+)/$', name='tag_archive')
     def tag_archive(self, request, tag=None):
 
         try:
             tag = Tag.objects.get(slug=tag)
         except Tag.DoesNotExist:
             if tag:
-                msg = 'There are no articles mentioning the coin"{}"'.format(tag.lower())
+                msg = 'There are no exchanges trading "{}"'.format(tag.upper())
                 messages.add_message(request, messages.INFO, msg)
             return redirect(self.url)
 
@@ -154,6 +155,8 @@ class ExchangePage(Page):
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
         context = super(ExchangePage, self).get_context(request)
+        newspages = ArticlePage.objects.live().filter(press_release=False).order_by('-first_published_at')
         exchangepages = self.get_parent().get_children().live().order_by('-first_published_at')[:4]
+        context['newspages'] = newspages
         context['exchangepages'] = exchangepages
         return context

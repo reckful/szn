@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'guides',
     'exchanges',
     'press',
+    'wallets',
     'wagtail.contrib.wagtailroutablepage',
 
     'wagtail.wagtailforms',

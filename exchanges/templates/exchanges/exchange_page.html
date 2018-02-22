@@ -7,13 +7,55 @@
 {% block body_class %}template-exchangepage{% endblock %}
 
 {% block content %}
-    {% image page.image width-133 height-120 %}
-    <a href="{{ page.ref_link }}">Start trading!</a>
-    {{ page.title }}
-    {{ page.body|richtext }}
-    {{ page.deposit|richtext }}{{page.withdrawal|richtext}}
-    {% for tag in page.get_tags  %}
-        <a href="/news/tags/{{tag|lower}}" class="btn btn-sm">{{ tag }}</a>
-    {% endfor %}
-    {{ page.fees }}
+    <main class="wrapper flex">
+        <aside class="flex flex_direction ico_side_info">
+            <div class="flex flex_align-items">
+                {% image page.image fill-107x107-c50 as image %}
+                <img src="{{ image.url }}"/>
+            </div>
+            <a class="flex flex_align-items" href="{{ page.ref_link }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41.999 41.999"><path d="M36.068 20.176l-29-20A1 1 0 1 0 5.5.999v40a1 1 0 0 0 1.568.823l29-20a.999.999 0 0 0 0-1.646z"/></svg>Start trading!</a>
+        </aside>
+        <article class="exchange_main_info">
+            <h1>{{ page.title }}</h1>
+            <p>{{ page.body|richtext }}</p>
+            <div class="exchange_io_info flex flex_align-items">
+                <div>
+                    <p>Deposit method</p>
+                    <p>{{ page.deposit_method|richtext }}</p>
+                </div>
+                <div>
+                    <p>Withdrawal method</p>
+                    <p>{{ page.withdrawal_method|richtext }}</p>
+                </div>
+            </div>
+            <p>Coins available</p>
+            <ul class="flex flex_align-items">
+                {% for tag in page.get_tags  %}
+                    <a href="/news/coins/{{tag|lower}}"><li>{{ tag }}</li></a>
+                {% endfor %}
+            </ul>
+            <p>Fees</p>
+            <div class="exchange_fees_info">{{ page.fees|richtext }}</div>
+        </article>
+        <nav class="related_news">
+            <p class="recent_news_header">Recent articles</p>
+            <div class="recent_news flex flex_align-content flex_direction flex_wrap">
+                {% for post in newspages|slice:":4" %}
+                    {% with post=post.specific %}
+                        <article>
+                            <a href="{% pageurl post %}">
+                                {% image post.image fill-270x152-c50 as image %}
+                                <img src="{{ image.url }}"/>
+                                <h3>{{ post.title|truncatechars:75 }}</h3>
+                                <div class="flex flex_align-text">
+                                    <p>{{ post.first_published_at|naturaltime }}</p>
+                                    <p>{{ post.author|richtext }}</p>
+                                </div>
+                            </a>
+                        </article>
+                    {% endwith %}
+                {% endfor %}
+            </div>
+        </nav>
+    </main>
 {% endblock %}

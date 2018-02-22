@@ -27,6 +27,10 @@ from wagtail.wagtailcore.models import Page
 from django.shortcuts import redirect, render
 from django.contrib import messages
 
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+
+from django.utils import timezone
+
 
 class NewsIndexPage(RoutablePageMixin, Page):
     intro = RichTextField(blank=True)
@@ -41,19 +45,29 @@ class NewsIndexPage(RoutablePageMixin, Page):
         context = super(NewsIndexPage, self).get_context(request)
         newspages = ArticlePage.objects.live().filter(press_release=False).order_by('-first_published_at')
         pressreleases = ArticlePage.objects.live().filter(press_release=True).order_by('-first_published_at')
+        
+        # page = request.GET.get('page')
+        # paginator = Paginator(newspages, 2)  # Show 12 pages per page
+        # try:
+        #     newspages = paginator.page(page)
+        # except PageNotAnInteger:
+        #     newspages = paginator.page(1)
+        # except EmptyPage:
+        #     newspages = paginator.page(paginator.num_pages)
+            
         context['newspages'] = newspages
         context['pressreleases'] = pressreleases
         return context
         
-    @route('^tags/$', name='tag_archive')
-    @route('^tags/(\w+)/$', name='tag_archive')
+    @route('^coins/$', name='tag_archive')
+    @route('^coins/(\w+)/$', name='tag_archive')
     def tag_archive(self, request, tag=None):
 
         try:
             tag = Tag.objects.get(slug=tag)
         except Tag.DoesNotExist:
             if tag:
-                msg = 'There are no articles mentioning the coin"{}"'.format(tag.upper())
+                msg = 'There are no articles mentioning the coin {}'.format(tag.upper())
                 messages.add_message(request, messages.INFO, msg)
             return redirect(self.url)
 
@@ -124,14 +138,23 @@ class ArticlePage(Page):
         ('embed', EmbedBlock()),
     ])
     coin_one = models.CharField(max_length=250, blank=True)
+    coin_one_link = models.CharField(max_length=250, blank=True)
     coin_two = models.CharField(max_length=250, blank=True)
+    coin_two_link = models.CharField(max_length=250, blank=True)
     coin_three = models.CharField(max_length=250, blank=True)
+    coin_three_link = models.CharField(max_length=250, blank=True)
     coin_four = models.CharField(max_length=250, blank=True)
+    coin_four_link = models.CharField(max_length=250, blank=True)
     tags = ClusterTaggableManager(through=ArticlePageTag, blank=True)
     featured = models.BooleanField(default=False, blank=True)
     author = RichTextField(blank=True)
     sponsored = models.BooleanField(default=False, blank=True)
     press_release = models.BooleanField(default=False, blank=True)
+    blue_pill = models.BooleanField(default=False, blank=True)
+    red_pill = models.BooleanField(default=False, blank=True)
+    green_pill = models.BooleanField(default=False, blank=True)
+    yellow_pill = models.BooleanField(default=False, blank=True)
+    pill_text = models.CharField(max_length=100, blank=True)
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -159,10 +182,27 @@ class ArticlePage(Page):
         StreamFieldPanel('body'),
         MultiFieldPanel([
             FieldPanel('coin_one'),
+            FieldPanel('coin_one_link'),
+        ], heading="Coin One Tag/Link"),
+        MultiFieldPanel([
             FieldPanel('coin_two'),
+            FieldPanel('coin_two_link'),
+        ], heading="Coin Two Tag/Link"),
+        MultiFieldPanel([
             FieldPanel('coin_three'),
+            FieldPanel('coin_three_link'),
+        ], heading="Coin Three Tag/Link"),
+        MultiFieldPanel([
             FieldPanel('coin_four'),
-        ], heading="Coins mentioned"),
+            FieldPanel('coin_four_link'),
+        ], heading="Coin Four Tag/Link"),
+        MultiFieldPanel([
+            FieldPanel('blue_pill'),
+            FieldPanel('red_pill'),
+            FieldPanel('green_pill'),
+            FieldPanel('yellow_pill'),
+            FieldPanel('pill_text'),
+        ], heading="Pill colour/text"),
     ]
     
     @property
@@ -195,5 +235,7 @@ class ArticlePage(Page):
         # Update context to include only published posts, ordered by reverse-chron
         context = super(ArticlePage, self).get_context(request)
         newspages = ArticlePage.objects.live().filter(press_release=False).order_by('-first_published_at')
+        relatedarticles = ArticlePage.objects.live().filter(press_release=False,tags=self.tags.first()).order_by('-first_published_at')
         context['newspages'] = newspages
+        context['relatedarticles'] = relatedarticles
         return context

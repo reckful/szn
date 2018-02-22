@@ -8,35 +8,318 @@
 {% block body_class %}template-exchangesindexpage{% endblock %}
 
 {% block content %}
-    <!--FEATURED EXCHANGES-->
-    {% for post in featuredexchanges %}
-        {% with post=post.specific %}
-            <a href="{% pageurl post %}">
-                <h1>FEATURED</h1>
-                {% image post.image fill-145x131-c50 as image %}
-                <img src="{{ image.url }}"/>
-                <h3>{{ post.title }}</h3>
-                {{ post.body|richtext|truncatechars:146 }}
-                {% for tag in post.get_tags|slice:":6" %}
-                    {{ tag }}
+    <nav class="news_sort">
+        <div class="wrapper">
+            <ul class="flex flex_align-items">
+                {% if request.get_full_path == "/exchanges/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                        <a href="/exchanges"><img src="{% static "images/coins_32x32/all.png" %}"></img></a>
+                    </li>
+                {% if request.get_full_path == "/exchanges/coins/btc/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                        <a href="/exchanges/coins/btc/"><img src="{% static "images/coins_32x32/btc.png" %}"></img></a>
+                    </li>
+                {% if request.get_full_path == "/exchanges/coins/eth/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/eth/"><img src="{% static "images/coins_32x32/eth.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/exchanges/coins/xrp/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/xrp/"><img src="{% static "images/coins_32x32/xrp.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/exchanges/coins/bch/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/bch/"><img src="{% static "images/coins_32x32/bch.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/exchanges/coins/ada/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/ada/"><img src="{% static "images/coins_32x32/ada.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/exchanges/coins/xlm/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/xlm/"><img src="{% static "images/coins_32x32/xlm.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/exchanges/coins/ltc/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/ltc/"><img src="{% static "images/coins_32x32/ltc.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/exchanges/coins/neo/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/neo/"><img src="{% static "images/coins_32x32/neo.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/exchanges/coins/eos/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/eos/"><img src="{% static "images/coins_32x32/eos.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/exchanges/coins/nem/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/nem/"><img src="{% static "images/coins_32x32/nem.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/exchanges/coins/iota/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/iota/"><img src="{% static "images/coins_32x32/iota.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/exchanges/coins/dash/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/dash/"><img src="{% static "images/coins_32x32/dash.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/exchanges/coins/xmr/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/xmr/"><img src="{% static "images/coins_32x32/xmr.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/exchanges/coins/trx/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/trx/"><img src="{% static "images/coins_32x32/trx.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/exchanges/coins/icx/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/icx/"><img src="{% static "images/coins_32x32/icx.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/exchanges/coins/etc/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/etc/"><img src="{% static "images/coins_32x32/etc.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/exchanges/coins/qtum/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/qtum/"><img src="{% static "images/coins_32x32/qtum.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/exchanges/coins/btg/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/btg/"><img src="{% static "images/coins_32x32/btg.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/exchanges/coins/ven/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/ven/"><img src="{% static "images/coins_32x32/ven.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/exchanges/coins/lsk/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/lsk/"><img src="{% static "images/coins_32x32/lsk.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/exchanges/coins/ppt/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/ppt/"><img src="{% static "images/coins_32x32/ppt.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/exchanges/coins/xrb/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/xrb/"><img src="{% static "images/coins_32x32/xrb.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/exchanges/coins/usdt/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/usdt/"><img src="{% static "images/coins_32x32/usdt.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/exchanges/coins/omg/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/omg/"><img src="{% static "images/coins_32x32/omg.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/exchanges/coins/steem/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/steem/"><img src="{% static "images/coins_32x32/steem.png" %}"></img></a>
+                </li>
+                {% if request.get_full_path == "/exchanges/coins/zec/" %}
+                    <li id="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="/exchanges/coins/zec/"><img src="{% static "images/coins_32x32/zec.png" %}"></img></a>
+                </li>
+                <li class="flex flex_align-items">
+                    <p>OTHER</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10" viewBox="0 0 292.362 292.362"><path d="M286.935 69.377c-3.614-3.617-7.898-5.424-12.848-5.424H18.274c-4.952 0-9.233 1.807-12.85 5.424C1.807 72.998 0 77.279 0 82.228c0 4.948 1.807 9.229 5.424 12.847l127.907 127.907c3.621 3.617 7.902 5.428 12.85 5.428s9.233-1.811 12.847-5.428L286.935 95.074c3.613-3.617 5.427-7.898 5.427-12.847 0-4.948-1.814-9.229-5.427-12.85z" fill="#d5d5d5"/></svg>
+                    <div class="dropdown_content">
+                        {% if posts %}
+                            <ul class="flex flex_align-center flex_direction flex_wrap">
+                                {% for tag in tags %}
+                                    <li><a href="/exchanges/coins/{{ tag|lower }}">{{ tag }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        {% if page.get_child_tags %}
+                            <ul class="flex flex_align-center flex_direction flex_wrap">
+                                {% for tag in page.get_child_tags %}
+                                    <li><a href="/exchanges/coins/{{ tag|lower }}">{{ tag }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    {% if not posts %}
+        <main class="wrapper">
+            <h2>Showing all exchanges</h2>
+            <div class="flex flex_align-items flex_wrap">
+                <!--FEATURED EXCHANGES-->
+                {% for post in featuredexchanges %}
+                    {% with post=post.specific %}
+                        <a class="exchange_card exchange_card_featured flex flex_align-items" href="{% pageurl post %}">
+                            <article class="flex flex_align-items">
+                                <p class="Sponsored_pill">Sponsored</p>
+                                {% image post.image fill-145x131-c50 as image %}
+                                <img src="{{ image.url }}"/>
+                                <div>
+                                    <h3>{{ post.title }}</h3>
+                                    {{ post.body|truncatechars:146|richtext }}
+                                    <ul class="flex flex_align-items">
+                                        {% for tag in post.get_tags|slice:":6" %}
+                                            <li>
+                                                {{ tag }}
+                                            </li>
+                                        {% endfor %}
+                                        {% if post.get_tags|length > 6 %}
+                                            <li class="coins_left_text">
+                                                +{{ post.get_tags|length|add:"-6" }} more
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </article>
+                        </a>
+                    {% endwith %}
                 {% endfor %}
-            </a>
-        {% endwith %}
-    {% endfor %}
-    <!--STANDARD EXCHANGES-->
-    {% for post in exchangepages %}
-        {% with post=post.specific %}
-            {% if post.featured == False %}
-                <a href="{% pageurl post %}">
-                    {% image post.image fill-145x131-c50 as image %}
-                    <img src="{{ image.url }}"/>
-                    <h3>{{ post.title }}</h3>
-                    {{ post.body|richtext|truncatechars:146 }}
-                    {% for tag in post.get_tags|slice:":6" %}
-                        {{ tag }}
-                    {% endfor %}
-                </a>
-            {% endif %}
-        {% endwith %}
-    {% endfor %}
+                <!--STANDARD EXCHANGES-->
+                {% for post in exchangepages %}
+                    {% with post=post.specific %}
+                        <a class="exchange_card flex flex_align-items" href="{% pageurl post %}">
+                            <article class="flex flex_align-items">
+                                {% image post.image fill-145x131-c50 as image %}
+                                <img src="{{ image.url }}"/>
+                                <div>
+                                    <h3>{{ post.title }}</h3>
+                                    {{ post.body|truncatechars:146|richtext }}
+                                    <ul class="flex flex_align-items">
+                                        {% for tag in post.get_tags|slice:":6" %}
+                                            <li>
+                                                {{ tag }}
+                                            </li>
+                                        {% endfor %}
+                                        {% if post.get_tags|length > 6 %}
+                                            <li class="coins_left_text">
+                                                +{{ post.get_tags|length|add:"-6" }} more
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </article>
+                        </a>
+                    {% endwith %}
+                {% endfor %}
+            </div>
+        </main>
+    {% endif %}
+    
+    {% if posts %}
+        <main class="wrapper">
+            <h2>Viewing all exchanges trading <span class="coin_highlight">{{ tag }}</span></h2>
+            <div class="flex flex_align-items flex_wrap">
+                {% for page in posts %}
+                    {% if page.featured == True %}
+                        <a class="exchange_card exchange_card_featured flex flex_align-items" href="{% pageurl page %}">
+                        <p class="Sponsored_pill">Sponsored</p>
+                    {% else %}
+                        <a class="exchange_card flex flex_align-items" href="{% pageurl page %}">
+                    {% endif %}
+                            <article class="flex flex_align-items">
+                                {% image page.image fill-145x131-c50 as image %}
+                                <img src="{{ image.url }}"/>
+                                <div>
+                                    <h3>{{ page.title }}</h3>
+                                    {{ page.body|truncatechars:146|richtext }}
+                                    <ul class="flex flex_align-items">
+                                        {% for tag in page.get_tags|slice:":6" %}
+                                            <li>
+                                                {{ tag }}
+                                            </li>
+                                        {% endfor %}
+                                        {% if page.get_tags|length > 6 %}
+                                            <li class="coins_left_text">
+                                                +{{ page.get_tags|length|add:"-6" }} more
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </article>
+                        </a>
+                {% endfor %}
+            </div>
+        </main>
+    {% endif %}
 {% endblock %}
