@@ -27,9 +27,9 @@ $(document).ready(function() {
     var individualCoinData2 = $.getJSON( "https://coincap.io/page/" + $("#coinName2").text(), function() {
         $(".coin_price_container2").append("<p>$" + individualCoinData2.responseJSON.price + "</p>");
         if(individualCoinData2.responseJSON.cap24hrChange > 0) {
-            $(".coin_price_container2").append("<div class='coin_price_percentage_container coin_percentage_change_green'></div>");
+            $(".coin_price_container2").append("<div class='coin_price_percentage_container2 coin_percentage_change_green'></div>");
         } else {
-            $(".coin_price_container2").append("<div class='coin_price_percentage_container coin_percentage_change_red'></div>");
+            $(".coin_price_container2").append("<div class='coin_price_percentage_container2 coin_percentage_change_red'></div>");
         }
         $(".coin_price_percentage_container2").append("<p>" + individualCoinData2.responseJSON.cap24hrChange + "%</p>");
         $(".coin_mktcap_container2").append("<p>$" + individualCoinData2.responseJSON.market_cap + "</p>");

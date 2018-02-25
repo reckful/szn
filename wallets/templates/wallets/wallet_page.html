@@ -66,7 +66,7 @@
                 </div>
             </div>
             <p class="wallet_titles">Supported coins</p>
-            <ul class="flex flex_align-items flex-wrap">
+            <ul class="flex flex_align-items flex_wrap">
                 {% for tag in page.get_tags %}
                     <a href="/news/coins/{{tag|lower}}" class="btn btn-sm"><li>{{ tag }}</li></a>
                 {% endfor %}

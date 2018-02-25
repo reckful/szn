@@ -1396,6 +1396,10 @@ footer {
     display: none;
 }
 
+.ico_info {
+    width: 190px;
+}
+
 .ico_info p {
     color: #3D3D3D;	
     font-size: 14px;
@@ -1403,7 +1407,7 @@ footer {
 }
 
 .ico_start {
-    margin-left: auto;
+    margin-left: 50px;
 }
 
 .ico_start p:nth-child(1) {
@@ -1418,6 +1422,7 @@ footer {
 	color: #3D3D3D;	
 	font-size: 16px;
 	white-space: nowrap;
+	margin-bottom: 3px;
 }
 
 .ico_start p:nth-child(3) {
@@ -1428,7 +1433,7 @@ footer {
 }
 
 .ico_end {
-    margin-left: 30px;
+    margin-left: 20px;
 }
 
 .ico_end p:nth-child(1) {
@@ -1443,6 +1448,7 @@ footer {
 	color: #3D3D3D;	
 	font-size: 16px;
 	white-space: nowrap;
+	margin-bottom: 3px;
 }
 
 .ico_end p:nth-child(3) {
@@ -2190,6 +2196,7 @@ footer {
 
 .wallet_main_info ul {
     padding: 0;
+    margin-bottom: 20px;
 }
 
 .wallet_main_info ul li {
