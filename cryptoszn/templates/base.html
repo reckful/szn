@@ -49,95 +49,97 @@
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
-        <header>
-            {% block messages %}
-                {% include "includes/messages.html" %}
-            {% endblock messages %}
-            <div class="ticker-wrap">
-                <div id="ticker" class="flex flex_align-items flex_justify-content">
-                    
-                </div>
-            </div>
-            <nav id="mainNavBar">
-                <div class="wrapper flex flex_align-items flex_justify-content">
-                    <a class="flex flex_align-items" href="/">
-                        <img class="logo" src="{% static "images/cryptoszn_new.png" %}" alt="CryptoSZN"/>
-                    </a>
-                    <ul class="main_nav flex flex_justify-content">
-                        {% if request.get_full_path|slice:":5" == "/news" %}
-                            <a class="active" href="/news">
-                        {% else %}
-                            <a href="/news">
-                        {% endif %}
-                                <li>News</li>
-                            </a>
-                        {% if request.get_full_path|slice:":5" == "/icos" %}
-                            <a class="active" href="/icos">
-                        {% else %}
-                            <a href="/icos">
-                        {% endif %}
-                            <li>ICOs</li>
-                        </a>
-                        <a href="">
-                            <li>Coin tracking</li>
-                        </a>
-                        {% if request.get_full_path|slice:":7" == "/guides" %}
-                            <a class="active" href="/guides">
-                        {% else %}
-                            <a href="/guides">
-                        {% endif %}
-                            <li>Guides</li>
-                        </a>
-                        {% if request.get_full_path|slice:":10" == "/exchanges" %}
-                            <a class="active" href="/exchanges">
-                        {% else %}
-                            <a href="/exchanges">
-                        {% endif %}
-                            <li>Exchanges</li>
-                        </a>
-                        {% if request.get_full_path|slice:":8" == "/wallets" %}
-                            <a class="active" href="/wallets">
-                        {% else %}
-                            <a href="/wallets">
-                        {% endif %}
-                            <li>Wallets</li>
-                        </a>
-                    </ul>
-                    <ul class="account_nav flex flex_align-items flex_justify-content">
-                        <a id="press_button" href="/submit-press-release"><li>Submit Press Release</li></a>
-                    </ul> 
-                    <div class="mobile_nav flex flex_align-items flex_justify-content">
-                        <div id="menuToggle">
-                            <input type="checkbox" />
-                            
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            
-                            <ul id="menu">
-                                <a href="/news"><li>News</li></a>
-                                <a href="/icos"><li>ICOs</li></a>
-                                <a href=""><li>Coin tracking</li></a>
-                                <a href="/guides"><li>Guides</li></a>
-                                <a href="/exchanges"><li>Exchanges</li></a>
-                                <a href="/wallets"><li>Wallets</li></a>
-                            </ul>
-                        </div>                    
+        <div class="content_container">
+            <header>
+                {% block messages %}
+                    {% include "includes/messages.html" %}
+                {% endblock messages %}
+                <div class="ticker-wrap">
+                    <div id="ticker" class="flex flex_align-items flex_justify-content">
+                        
                     </div>
                 </div>
-            </nav>
-        </header>
+                <nav id="mainNavBar">
+                    <div class="wrapper flex flex_align-items flex_justify-content">
+                        <a class="flex flex_align-items" href="/">
+                            <img class="logo" src="{% static "images/cryptoszn_new.png" %}" alt="CryptoSZN"/>
+                        </a>
+                        <ul class="main_nav flex flex_justify-content">
+                            {% if request.get_full_path|slice:":5" == "/news" %}
+                                <a class="active" href="/news">
+                            {% else %}
+                                <a href="/news">
+                            {% endif %}
+                                    <li>News</li>
+                                </a>
+                            {% if request.get_full_path|slice:":5" == "/icos" %}
+                                <a class="active" href="/icos">
+                            {% else %}
+                                <a href="/icos">
+                            {% endif %}
+                                <li>ICOs</li>
+                            </a>
+                            <a href="">
+                                <li>Coin tracking</li>
+                            </a>
+                            {% if request.get_full_path|slice:":7" == "/guides" %}
+                                <a class="active" href="/guides">
+                            {% else %}
+                                <a href="/guides">
+                            {% endif %}
+                                <li>Guides</li>
+                            </a>
+                            {% if request.get_full_path|slice:":10" == "/exchanges" %}
+                                <a class="active" href="/exchanges">
+                            {% else %}
+                                <a href="/exchanges">
+                            {% endif %}
+                                <li>Exchanges</li>
+                            </a>
+                            {% if request.get_full_path|slice:":8" == "/wallets" %}
+                                <a class="active" href="/wallets">
+                            {% else %}
+                                <a href="/wallets">
+                            {% endif %}
+                                <li>Wallets</li>
+                            </a>
+                        </ul>
+                        <ul class="account_nav flex flex_align-items flex_justify-content">
+                            <a id="press_button" href="/submit-press-release"><li>Submit Press Release</li></a>
+                        </ul> 
+                        <div class="mobile_nav flex flex_align-items flex_justify-content">
+                            <div id="menuToggle">
+                                <input type="checkbox" />
+                                
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                
+                                <ul id="menu">
+                                    <a href="/news"><li>News</li></a>
+                                    <a href="/icos"><li>ICOs</li></a>
+                                    <a href=""><li>Coin tracking</li></a>
+                                    <a href="/guides"><li>Guides</li></a>
+                                    <a href="/exchanges"><li>Exchanges</li></a>
+                                    <a href="/wallets"><li>Wallets</li></a>
+                                </ul>
+                            </div>                    
+                        </div>
+                    </div>
+                </nav>
+            </header>
+        
+            {% wagtailuserbar %}
     
-        {% wagtailuserbar %}
-
-        {% block content %}{% endblock %}
-
-        {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/cryptoszn.js' %}"></script>
-        {% block extra_js %}
-            {# Override this in templates to add extra javascript #}
-        {% endblock %}
+            {% block content %}{% endblock %}
+    
+            {# Global javascript #}
+            <script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/cryptoszn.js' %}"></script>
+            {% block extra_js %}
+                {# Override this in templates to add extra javascript #}
+            {% endblock %}
+        </div>
         
         <footer>
             <div class="wrapper flex flex_align-items flex_direction">

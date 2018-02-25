@@ -79,6 +79,9 @@
     font-style: normal;
 }
 
+html {
+    height: 100%;
+}
 
 body {
     background: #F4F4F4;
@@ -86,6 +89,9 @@ body {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 ul {
@@ -94,6 +100,14 @@ ul {
 
 a {
     text-decoration: none;
+}
+
+.content_container {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex-shrink: 0;
 }
 
 .flex {
@@ -2200,7 +2214,8 @@ footer {
 }
 
 .wallet_main_info ul li {
-    margin-right: 5px;
+    margin-right: 7px;
+    margin-bottom: 7px;
 }
 
 .wallet_titles {
