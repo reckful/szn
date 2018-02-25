@@ -1400,7 +1400,6 @@ footer {
     color: #3D3D3D;	
     font-size: 14px;
     font-weight: 300;
-    width: 90%;
 }
 
 .ico_start {
@@ -2313,4 +2312,8 @@ blockquote span{
 
 .platforms-margin {
     margin-top:5px;
+}
+
+.filter {
+    margin-top: 30px;
 }
