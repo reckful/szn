@@ -31,6 +31,8 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 from django.utils import timezone
 
+import requests
+import json
 
 class NewsIndexPage(RoutablePageMixin, Page):
     intro = RichTextField(blank=True)
@@ -92,6 +94,7 @@ class NewsIndexPage(RoutablePageMixin, Page):
             'releases': releases,
         }
         return render(request, 'news/news_index_page.html', context)
+        
 
     def serve_preview(self, request, mode_name):
         # Needed for previews to work

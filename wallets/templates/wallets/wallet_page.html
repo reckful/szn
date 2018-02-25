@@ -19,7 +19,7 @@
         <article class="wallet_main_info">
             <h1>{{ page.title }}</h1>
             <p class="wallet_titles">Platforms</p>
-            <ul class="flex flex_align-items">
+            <ul class="flex flex_align-items platforms-margin">
                 {% if page.webwallet %}
                     <li><img src="{% static "images/platforms/website.png" %}" alt="Web Wallet"></li>
                 {% endif %}
@@ -45,7 +45,7 @@
                     <li><img src="{% static "images/platforms/apple.png" %}" alt="macOS"></li>
                 {% endif %}
             </ul>
-            <div class="flex flex_align-items">
+            <div class="flex flex_align-items wallet_usability_info">
                 {% if page.safety == "1" %}
                     <img src="{% static "images/safety/1.png" %}">
                     <p>You store your private keys.</p>
@@ -66,12 +66,11 @@
                 </div>
             </div>
             <p class="wallet_titles">Supported coins</p>
-            <ul class="flex flex_align-items">
+            <ul class="flex flex_align-items flex-wrap">
                 {% for tag in page.get_tags %}
                     <a href="/news/coins/{{tag|lower}}" class="btn btn-sm"><li>{{ tag }}</li></a>
                 {% endfor %}
             </ul>
-            <p>About</p>
             <p>{{ page.about|richtext }}</p>
         </article>
         <nav class="related_news">

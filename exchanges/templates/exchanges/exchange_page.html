@@ -29,7 +29,7 @@
                 </div>
             </div>
             <p>Coins available</p>
-            <ul class="flex flex_align-items">
+            <ul class="flex flex_align-items flex-wrap">
                 {% for tag in page.get_tags  %}
                     <a href="/news/coins/{{tag|lower}}"><li>{{ tag }}</li></a>
                 {% endfor %}

@@ -291,7 +291,7 @@
                                             <p>{{ post.ease }}</p>
                                         </div>
                                     </div>
-                                    <ul>
+                                    <ul class="flex flex_align-items">
                                         {% for tag in post.get_tags|slice:":5" %}
                                             <li>
                                                 {{ tag }}

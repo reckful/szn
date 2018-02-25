@@ -169,6 +169,6 @@ class GuidePage(Page):
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
         context = super(GuidePage, self).get_context(request)
-        guidespages = self.get_parent().get_children().live().order_by('-first_published_at')[:4]
+        guidespages = GuidePage.objects.live().filter(tags=self.tags.first()).order_by('-first_published_at')[:6]
         context['guidespages'] = guidespages
         return context

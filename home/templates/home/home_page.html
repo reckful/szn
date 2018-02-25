@@ -33,6 +33,18 @@
                     {% with post=post.specific %}
                         <article>
                             <a href="{% pageurl post %}">
+                                 {% if post.pill_text %}
+                                    {% if post.green_pill %}
+                                        <p class="news_overlay overlay_green">
+                                    {% elif post.red_pill %}
+                                        <p class="news_overlay overlay_red">
+                                    {% elif post.blue_pill %}
+                                        <p class="news_overlay overlay_blue">
+                                    {% elif post.yellow_pill %}
+                                        <p class="news_overlay overlay_yellow">
+                                    {% endif %}
+                                        {{ post.pill_text }}</p>
+                                {% endif %}
                                 {% image post.image fill-270x152-c50 as image %}
                                 <img src="{{ image.url }}"/>
                                 <h3>{{ post.title|truncatechars:75 }}</h3>

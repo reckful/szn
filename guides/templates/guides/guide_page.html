@@ -7,8 +7,36 @@
 {% block body_class %}template-guidepage{% endblock %}
 
 {% block content %}
-    <div class="wrapper">
-        <a class="flex flex_align-items" href="{{ page.get_parent.url }}"><svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 459 459"><path d="M178.5 140.25v-102L0 216.75l178.5 178.5V290.7c127.5 0 216.75 40.8 280.5 130.05-25.5-127.5-102-255-280.5-280.5z" fill="#21900c"/></svg>Back to guides</a>
-        {{ page.body }}
-    </div>
+    <main class="wrapper flex">
+        <article class="guide_main_info">
+            <a class="flex flex_align-items" href="{{ page.get_parent.url }}"><svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 459 459"><path d="M178.5 140.25v-102L0 216.75l178.5 178.5V290.7c127.5 0 216.75 40.8 280.5 130.05-25.5-127.5-102-255-280.5-280.5z" fill="#21900c"/></svg>Back to guides</a>
+            {% image page.image width-630 height-330 %}
+            <p>{{ page.title }}</p>
+            {{ page.body }}
+        </article>
+        <nav class="related_news">
+            {% if guidespages|length != 1 %}
+                <p class="recent_news_header">Similar guides</p>
+                <div class="recent_news flex flex_align-content flex_direction flex_wrap">
+                    {% for post in guidespages|slice:":4" %}
+                        {% with post=post.specific %}
+                            {% if post != page %}
+                                <article>
+                                    <a href="{% pageurl post %}">
+                                        {% image post.image fill-270x152-c50 as image %}
+                                        <img src="{{ image.url }}"/>
+                                        <h3>{{ post.title|truncatechars:75 }}</h3>
+                                        <div class="flex flex_align-text">
+                                            <p>{{ post.first_published_at|naturaltime }}</p>
+                                            <p>{{ post.author|richtext }}</p>
+                                        </div>
+                                    </a>
+                                </article>
+                            {% endif %}
+                        {% endwith %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </nav>
+    </main>
 {% endblock %}

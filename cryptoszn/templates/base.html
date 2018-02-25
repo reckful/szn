@@ -25,12 +25,12 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" X-Content-Type-Options="nosniff" />
         <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no" />
         <title>
             {% block title %}
                 {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
-                {% if self.title == null %}Filter{% endif %}
+                {% if self.title == null %}{{ tag }} Results{% endif %}
             {% endblock %}
             {% block title_suffix %}
                 - CryptoSZN
@@ -55,44 +55,10 @@
             {% endblock messages %}
             <div class="ticker-wrap">
                 <div id="ticker" class="flex flex_align-items flex_justify-content">
-                    <p class="positive">BTC/USD: 7,409.63</p>
-                    <p>|</p>
-                    <p class="negative">ETH/USD: 730.21</p>
-                    <p>|</p>
-                    <p class="positive">XRP/USD: 0.726538</p>
-                    <p>|</p>
-                    <p class="positive">BCH/USD: 963.35</p>
-                    <p>|</p>
-                    <p class="negative">ADA/USD: 0.334728</p>
-                    <p>|</p>
-                    <p class="negative">LTC/USD: 134.31</p>
-                    <p>|</p>
-                    <p class="positive">BTC/USD: 7,409.63</p>
-                    <p>|</p>
-                    <p class="negative">ETH/USD: 730.21</p>
-                    <p>|</p>
-                    <p class="positive">XRP/USD: 0.726538</p>
-                    <p>|</p>
-                    <p class="positive">BCH/USD: 963.35</p>
-                    <p>|</p>
-                    <p class="negative">ADA/USD: 0.334728</p>
-                    <p>|</p>
-                    <p class="negative">LTC/USD: 134.31</p>
-                    <p>|</p>
-                    <p class="positive">BTC/USD: 7,409.63</p>
-                    <p>|</p>
-                    <p class="negative">ETH/USD: 730.21</p>
-                    <p>|</p>
-                    <p class="positive">XRP/USD: 0.726538</p>
-                    <p>|</p>
-                    <p class="positive">BCH/USD: 963.35</p>
-                    <p>|</p>
-                    <p class="negative">ADA/USD: 0.334728</p>
-                    <p>|</p>
-                    <p class="negative">LTC/USD: 134.31</p>
+                    
                 </div>
             </div>
-            <nav>
+            <nav id="mainNavBar">
                 <div class="wrapper flex flex_align-items flex_justify-content">
                     <a class="flex flex_align-items" href="/">
                         <img class="logo" src="{% static "images/cryptoszn_new.png" %}" alt="CryptoSZN"/>
@@ -167,6 +133,7 @@
         {% block content %}{% endblock %}
 
         {# Global javascript #}
+        <script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/cryptoszn.js' %}"></script>
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}
@@ -202,15 +169,15 @@
                         <li>
                             <p>Become a collaborator</p>
                         </li>
-                        <li><a href="">Have a breaking story?</a></li>
-                        <li><a href="">Author program</a></li>
+                        <li><a href="/breaking-story">Have a breaking story?</a></li>
+                        <li><a href="/author-program">Author program</a></li>
                     </ul>
                 </div>
                 <div class="footer_info flex flex_align-items flex_justify-content">
                     <p>© 2018 CryptoSZN. All rights reserved.</p>
                     <div class="info_links flex flex_align-items flex_justify-content">
-                        <a href="">Privacy Policy</a>
-                        <a href="">Terms of Service</a>
+                        <a href="/terms-service">Privacy Policy</a>
+                        <a href="/terms-service">Terms of Service</a>
                     </div>
                     <ul class="social_links flex flex_align-items flex_justify-content">
                         <a href=""><li><svg id="telegram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 189.473 189.473"><path d="M152.531 179.476c-1.48 0-2.95-.438-4.211-1.293l-47.641-32.316-25.552 18.386a7.502 7.502 0 0 1-11.633-4.174l-12.83-48.622L4.821 93.928a7.501 7.501 0 0 1-.094-13.975l174.312-69.36a7.503 7.503 0 0 1 10.282 8.408L159.898 173.38a7.499 7.499 0 0 1-7.367 6.096zm-47.669-48.897l42.437 28.785L170.193 39.24l-82.687 79.566 17.156 11.638c.069.043.135.089.2.135zm-35.327-6.401l5.682 21.53 12.242-8.809-16.03-10.874a7.478 7.478 0 0 1-1.894-1.847zM28.136 86.782l31.478 12.035a7.5 7.5 0 0 1 4.573 5.092l3.992 15.129a7.504 7.504 0 0 1 2.259-4.624L149.227 38.6 28.136 86.782z"/></svg></li></a>

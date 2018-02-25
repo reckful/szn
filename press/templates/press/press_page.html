@@ -5,11 +5,13 @@
 {% block body_class %}template-presspage{% endblock %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
-    {{ page.intro|richtext }}
-    <form action="{% pageurl page %}" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit">
-    </form>
+    <main class="wrapper press_form">
+        <h1>{{ page.title }}</h1>
+        {{ page.intro|richtext }}
+        <form action="{% pageurl page %}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit">
+        </form>
+    </main>
 {% endblock %}

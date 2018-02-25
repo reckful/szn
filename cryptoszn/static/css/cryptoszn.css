@@ -178,8 +178,8 @@ a {
     animation-timing-function: linear;
     -webkit-animation-name: ticker;
     animation-name: ticker;
-    -webkit-animation-duration: 60s;
-    animation-duration: 60s;
+    -webkit-animation-duration: 180s;
+    animation-duration: 180s;
 }
 
 #ticker p {
@@ -199,6 +199,12 @@ a {
 nav {
     height: 82px;
     background-color: #fff;
+}
+
+#mainNavBar {
+    width: 100%;
+    top: 0;
+    z-index: 5;
 }
 
 .logo {
@@ -800,6 +806,22 @@ footer {
     width: 100%;
 }
 
+.template-articlepage .block-paragraph h2 {
+    color: #3D3D3D;
+}
+
+.template-articlepage .block-paragraph h3 {
+    color: #3D3D3D;
+}
+
+.template-articlepage .block-paragraph h4 {
+    color: #3D3D3D;
+}
+
+.template-articlepage .block-paragraph h5 {
+    color: #3D3D3D;
+}
+
 .button {
     color: #FFFFFF;
     font-size: 15px;
@@ -1039,7 +1061,7 @@ footer {
 
 .content a {
     color: #21900C;
-    font-size: 18px;	
+    font-size: 16px;	
     font-weight: 600;
 }
 
@@ -1078,6 +1100,7 @@ footer {
     margin-top: 30px;
     margin-left: 2.5%;
     width: 22.5%;
+    position: relative;
 }
 
 .coins_mentioned_header {
@@ -1088,6 +1111,12 @@ footer {
     margin-bottom: 10px;
 }
 
+.coin_card {
+    top: 110px;
+    position: -webkit-sticky;
+    position: sticky;
+}
+
 .coin_card a {
     width: 100%;
 	background-color: #21900C;
@@ -1096,6 +1125,7 @@ footer {
 	font-weight: bold;
 	padding: 8px 0;
 	justify-content: center;
+	margin-bottom: 20px;
 }
 
 .coin_card a p {
@@ -1118,17 +1148,31 @@ footer {
 .coin_card_inner p {
     margin: 2px 0;
     color: #3D3D3D;
-    font-size: 15px;	
+    font-size: 14px;	
     font-weight: 500;
+}
+
+.coin_card_inner .coin_time_change {
+    color: #9F9F9F;
+    font-size: 13px;
+    font-weight: 400;
 }
 
 .coin_card_inner .coin_stats_label {
     font-weight: 600;
     margin-right: 5px;
+    white-space: nowrap;
 }
 
-.coin_card .coin_card_inner .coin_percentage_change p {
+.coin_card .coin_card_inner .coin_percentage_change_green p {
     color: #21900C;
+    font-size: 10px;	
+    font-weight: 500;
+    margin-left: 5px;
+}
+
+.coin_card .coin_card_inner .coin_percentage_change_red p {
+    color: #f32727;
     font-size: 10px;	
     font-weight: 500;
     margin-left: 5px;
@@ -1332,6 +1376,26 @@ footer {
     margin-top: 0;
 }
 
+#UPCOMING-PRE {
+    display: none;
+}
+
+#CONCLUDED-PRE {
+    display: none;
+}
+
+#ACTIVE-POST {
+    display: none;
+}
+
+#UPCOMING-POST {
+    display: none;
+}
+
+#CONCLUDED-POST {
+    display: none;
+}
+
 .ico_info p {
     color: #3D3D3D;	
     font-size: 14px;
@@ -1405,6 +1469,9 @@ footer {
     height: 190px;
     justify-content: center;
     margin-bottom: 5px;
+    top: 110px;
+    position: -webkit-sticky;
+    position: sticky;
 }
 
 .ico_side_info img {
@@ -1416,6 +1483,9 @@ footer {
     background-color: #21900C;
     font-size: 15px;
     font-weight: 500;
+    top: 305px;
+    position: -webkit-sticky;
+    position: sticky;
 }
 
 .ico_side_info a svg {
@@ -1756,6 +1826,51 @@ footer {
     white-space: nowrap;
 }
 
+.guide_main_info {
+    width: 50%;
+    margin-top: 30px;
+    margin-bottom: 124px;
+}
+
+.guide_main_info a {
+    color: #21900C;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.guide_main_info svg {
+    height: 15px;
+    width: 15px;
+    margin-right: 10px;
+}
+
+.guide_main_info img {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.guide_main_info p {
+    color: #3D3D3D;	
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.guide_main_info > p {
+    color: #3D3D3D;	
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.guide_main_info .block-heading {
+    color: #3D3D3D;	
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.template-guidepage .related_news {
+    margin-left: auto;
+}
+
 .featured_p {
     font-size: 12px;
     color: #727272;
@@ -1833,7 +1948,6 @@ footer {
     background-color: #E7E7E7;
     padding: 5px 10px;
     margin-right: 5px;
-    width: 25px;
 }
 
 .exchange_card .coins_left_text {
@@ -1891,20 +2005,23 @@ footer {
 
 .exchange_main_info ul {
     padding: 0;
+    margin-top: 0 !important;
+    font-weight: 300;
 }
 
 .exchange_main_info ul a {
-    color: #FFFFFF;	
+    color: #737373;
     font-size: 12px;
     font-weight: 800;
-    background: #21900C;
+    background: #E7E7E7;
     border-radius: 8px;
     padding: 5px 12px;
     margin-right: 7px;
+    margin-bottom: 7px;
 }
 
 .exchange_main_info .exchange_fees_info .rich-text  {
-    height: 500px !important;
+    height: 490px !important;
     display: flex !important;
     flex-direction: column !important;
     flex-wrap: wrap !important;
@@ -2040,7 +2157,6 @@ footer {
     background-color: #E7E7E7;
     padding: 5px 10px;
     margin-right: 5px;
-    width: 25px;
 }
 
 .wallet_card p {
@@ -2085,6 +2201,79 @@ footer {
     color: #7A7A7A;	
     font-size: 12px;
     font-weight: 300;
+    margin-bottom: 0px;
+}
+
+.wallet_main_info .rich-text p {
+    color: #3D3D3D;
+    font-size: 16px;
+    font-weight: 300;
+    word-wrap: break-word;
+}
+
+.wallet_main_info ul:nth-child(6) li {
+    color: #737373;
+    font-size: 12px;	
+    font-weight: 800;
+    border-radius: 8px;	
+    background-color: #E7E7E7;
+    padding: 5px 12px;
+    margin-right: 5px;
+}
+
+.wallet_usability_info > p {
+    color: #737373;
+    font-family: Montserrat;
+    font-size: 10px;
+    font-weight: 300;
+    width: 15%;
+    margin-left: 11px;
+}
+
+.wallet_usability_info div:nth-child(3) {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.wallet_usability_info div p {
+    margin: 0;
+}
+
+.wallet_usability_info div p:nth-child(2) {
+    color: #737373;	
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 3px;
+}
+
+.press_form {
+    color: #3D3D3D;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.press_form input {
+    display: block;
+    width: 45%;
+}
+
+.press_form input[type=submit] {
+    display: block;
+    width: auto;
+}
+
+.press_form input[type=checkbox] {
+    display: block;
+    width: auto;
+}
+
+.press_form textarea {
+    display: block;
+    width: 45%;
+}
+
+.press_form span {
+    font-size: 12px;
 }
 
 blockquote{
@@ -2120,4 +2309,8 @@ blockquote span{
   font-style: normal;
   font-weight: bold;
   margin-top:1em;
+}
+
+.platforms-margin {
+    margin-top:5px;
 }

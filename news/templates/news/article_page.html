@@ -27,43 +27,58 @@
                 <p><b>Disclaimer:</b> <i>CryptoSZN does not endorse any content or product on this page. While we aim at providing you all important information that we could obtain, readers should do their own research before taking any actions related to the company and carry full responsibility for their decisions, nor this article can be considered as an investment advice.</i></p>
             {% endif %}
             {% if page.press_release %}
-                <p>This is a paid press release. CryptoSZN does not endorse and is not responsible for or liable for any content, accuracy, quality, advertising, products or other materials on this page. Readers should do their own research before taking any actions related to the company. CryptoSZN is not responsible, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with the use of or reliance on any content, goods or services mentioned in the press release.</p>
+                <p><b>Disclaimer:</b> <i>This is a paid press release. CryptoSZN does not endorse and is not responsible for or liable for any content, accuracy, quality, advertising, products or other materials on this page. Readers should do their own research before taking any actions related to the company. CryptoSZN is not responsible, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with the use of or reliance on any content, goods or services mentioned in the press release.</i></p>
             {% endif %}
         </article>
         {% if not page.press_release %}
             <aside class="coins_mentioned">
                 <p class="coins_mentioned_header">Coin(s) mentioned</p>
                 <div class="coin_card">
-                    <div class="coin_card_inner">
-                        <div class="flex flex_align-items">
-                            <h2>NEM</h2>
-                            <p>Last 24h</p>
-                        </div>
-                        <div class="flex flex_align-items">
-                            <p class="coin_stats_label">Price:</p>
-                            <p>$0.939087</p>
-                            <div class="coin_percentage_change">
-                                <p>4.74%</p>
+                    {% if page.coin_one %}
+                        <div class="coin_card_inner">
+                            <div class="flex flex_align-items flex_justify-content">
+                                <h2 id="coinName1">{{ page.coin_one }}</h2>
+                                <p class="coin_time_change">Last 24h</p>
                             </div>
+                            <div class="coin_price_container flex flex_align-items">
+                                <p class="coin_stats_label">Price:</p>
+                            </div>
+                            <div class="coin_mktcap_container flex flex_align-items">
+                                <p class="coin_stats_label">Mkt Cap:</p>
+                            </div>
+                            <div class="coin_volume_container flex flex_align-items">
+                                <p class="coin_stats_label">Volume:</p>
+                            </div>                
                         </div>
-                        <div class="flex flex_align-items">
-                            <p class="coin_stats_label">Mkt Cap:</p>
-                            <p>$8,451,782,999</p>
+                        <a class="flex flex_align-items" href="{{ page.coin_one_link }}"><p>Buy {{page.coin_one}} Instantly</p></a>
+                    {% endif %}
+                    {% if page.coin_two %}
+                        <div class="coin_card_inner">
+                            <div class="flex flex_align-items flex_justify-content">
+                                <h2 id="coinName2">{{ page.coin_two }}</h2>
+                                <p class="coin_time_change">Last 24h</p>
+                            </div>
+                            <div class="coin_price_container2 flex flex_align-items">
+                                <p class="coin_stats_label">Price:</p>
+                            </div>
+                            <div class="coin_mktcap_container2 flex flex_align-items">
+                                <p class="coin_stats_label">Mkt Cap:</p>
+                            </div>
+                            <div class="coin_volume_container2 flex flex_align-items">
+                                <p class="coin_stats_label">Volume:</p>
+                            </div>                
                         </div>
-                        <div class="flex flex_align-items">
-                            <p class="coin_stats_label">Volume:</p>
-                            <p>$120,000</p>
-                        </div>                </div>
-                    <a class="flex flex_align-items" href=""><p>Buy NEM Instantly</p></a>
+                        <a class="flex flex_align-items" href="{{ page.coin_two_link }}"><p>Buy {{page.coin_two}} Instantly</p></a>
+                    {% endif %}
                 </div>
             </aside>
         {% else %}
             <aside class="coins_mentioned">
-                <p class="coins_mentioned_header">Stay up to date</p>
+                
             </aside>
         {% endif %}
         <nav class="related_news">
-            {% if relatedarticles|length != 1 %}
+            {% if relatedarticles|length != 1 and page.press_release == False %}
                 <p class="recent_news_header">Related articles</p>
                 <div class="recent_news flex flex_align-content flex_direction flex_wrap">
                     {% for post in relatedarticles|slice:":4" %}
