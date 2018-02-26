@@ -393,16 +393,18 @@
                         <li class="pages">
                             Page {{ walletspages.number }} of {{ walletspages.paginator.num_pages }}
                         </li>
-                        <li class="previous">
-                            {% if walletspages.has_previous %}
-                                <a href="?page={{ walletspages.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}"><< Previous</a>
-                            {% endif %}
-                        </li>
-                        <li class="next">
-                            {% if walletspages.has_next %}
-                                <a href="?page={{ walletspages.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Next >></a>
-                            {% endif %}
-                        </li>
+                        <div class="page_button_container">
+                            <li class="previous">
+                                {% if walletspages.has_previous %}
+                                    <a href="?page={{ walletspages.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}"><< Previous</a>
+                                {% endif %}
+                            </li>
+                            <li class="next">
+                                {% if walletspages.has_next %}
+                                    <a href="?page={{ walletspages.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Next >></a>
+                                {% endif %}
+                            </li>
+                        </div>
                     </ul>
                 {% endif %}
             </div>
