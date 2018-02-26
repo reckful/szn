@@ -390,6 +390,9 @@
                 {% endfor %}
                 {% if walletspages.paginator.num_pages > 1 %}
                     <ul class="pager">
+                        <li class="pages">
+                            Page {{ walletspages.number }} of {{ walletspages.paginator.num_pages }}
+                        </li>
                         <li class="previous">
                             {% if walletspages.has_previous %}
                                 <a href="?page={{ walletspages.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}"><< Previous</a>
@@ -399,9 +402,6 @@
                             {% if walletspages.has_next %}
                                 <a href="?page={{ walletspages.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Next >></a>
                             {% endif %}
-                        </li>
-                        <li class="pages">
-                            Page {{ walletspages.number }} of {{ walletspages.paginator.num_pages }}
                         </li>
                     </ul>
                 {% endif %}

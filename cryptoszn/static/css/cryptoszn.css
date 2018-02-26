@@ -2479,6 +2479,7 @@ blockquote span{
 }
 
 .previous a {
+    margin-left: auto;
     color: #FFFFFF;
     font-size: 14px;
     font-weight: 500;
@@ -2495,10 +2496,8 @@ blockquote span{
     padding: 8px 11px;
     border-radius: 2px;
     background-color: #21900C;
-    margin-right: 10px
 }
 
 .pages {
     color: #3D3D3D;
-    margin-left: auto;
 }

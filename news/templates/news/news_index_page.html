@@ -403,6 +403,9 @@
                 </div>
                 {% if allnews.paginator.num_pages > 1 %}
                     <ul class="pager">
+                        <li class="pages">
+                            Page {{ allnews.number }} of {{ allnews.paginator.num_pages }}
+                        </li>
                         <li class="previous">
                             {% if allnews.has_previous %}
                                 <a href="?page={{ allnews.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}"><< Previous</a>
@@ -412,9 +415,6 @@
                             {% if allnews.has_next %}
                                 <a href="?page={{ allnews.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Next >></a>
                             {% endif %}
-                        </li>
-                        <li class="pages">
-                            Page {{ allnews.number }} of {{ allnews.paginator.num_pages }}
                         </li>
                     </ul>
                 {% endif %}

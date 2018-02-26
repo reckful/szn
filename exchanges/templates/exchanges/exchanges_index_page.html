@@ -284,6 +284,9 @@
                 {% endfor %}
                 {% if exchangepages.paginator.num_pages > 1 %}
                     <ul class="pager">
+                        <li class="pages">
+                            Page {{ exchangepages.number }} of {{ exchangepages.paginator.num_pages }}
+                        </li>
                         <li class="previous">
                             {% if exchangepages.has_previous %}
                                 <a href="?page={{ exchangepages.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}"><< Previous</a>
@@ -293,9 +296,6 @@
                             {% if exchangepages.has_next %}
                                 <a href="?page={{ exchangepages.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Next >></a>
                             {% endif %}
-                        </li>
-                        <li class="pages">
-                            Page {{ exchangepages.number }} of {{ exchangepages.paginator.num_pages }}
                         </li>
                     </ul>
                 {% endif %}
