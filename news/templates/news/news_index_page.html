@@ -406,16 +406,18 @@
                         <li class="pages">
                             Page {{ allnews.number }} of {{ allnews.paginator.num_pages }}
                         </li>
-                        <li class="previous">
-                            {% if allnews.has_previous %}
-                                <a href="?page={{ allnews.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}"><< Previous</a>
-                            {% endif %}
-                        </li>
-                        <li class="next">
-                            {% if allnews.has_next %}
-                                <a href="?page={{ allnews.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Next >></a>
-                            {% endif %}
-                        </li>
+                        <div class="page_button_container">
+                            <li class="previous">
+                                {% if allnews.has_previous %}
+                                    <a href="?page={{ allnews.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}"><< Previous</a>
+                                {% endif %}
+                            </li>
+                            <li class="next">
+                                {% if allnews.has_next %}
+                                    <a href="?page={{ allnews.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Next >></a>
+                                {% endif %}
+                            </li>
+                        </div>
                     </ul>
                 {% endif %}
             </div>

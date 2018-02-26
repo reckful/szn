@@ -2479,14 +2479,16 @@ blockquote span{
 }
 
 .previous a {
-    margin-left: auto;
     color: #FFFFFF;
     font-size: 14px;
     font-weight: 500;
     padding: 8px 11px;
     border-radius: 2px;
     background-color: #21900C;
-    margin-right: 10px
+}
+
+.next {
+    margin-left: 10px;
 }
 
 .next a {
@@ -2496,6 +2498,10 @@ blockquote span{
     padding: 8px 11px;
     border-radius: 2px;
     background-color: #21900C;
+}
+
+.page_button_container {
+    margin-left: auto;
 }
 
 .pages {
