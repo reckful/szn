@@ -27,6 +27,8 @@ from wagtail.wagtailcore.models import Page
 from django.shortcuts import redirect, render
 from django.contrib import messages
 
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+
 from news.models import ArticlePage
 
 class WalletsIndexPage(RoutablePageMixin, Page):
@@ -40,10 +42,21 @@ class WalletsIndexPage(RoutablePageMixin, Page):
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
         context = super(WalletsIndexPage, self).get_context(request)
-        walletspages = WalletPage.objects.live().filter(sponsored=False).order_by('-first_published_at')
+        walletspages = WalletPage.objects.live().filter(sponsored=False)
         sponsoredwallets = WalletPage.objects.live().filter(sponsored=True).order_by('-first_published_at')
+        
+        page = request.GET.get('page')
+        paginator = Paginator(walletspages, 16)  # Show 12 pages per page
+        try:
+            walletspages = paginator.page(page)
+        except PageNotAnInteger:
+            walletspages = paginator.page(1)
+        except EmptyPage:
+            walletspages = paginator.page(paginator.num_pages)
+        
         context['walletspages'] = walletspages
         context['sponsoredwallets'] = sponsoredwallets
+        
         return context
         
     @route('^coins/$', name='tag_archive')

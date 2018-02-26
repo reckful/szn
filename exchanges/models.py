@@ -19,6 +19,9 @@ from wagtail.wagtailcore.models import Page
 from django.shortcuts import redirect, render
 from django.contrib import messages
 
+
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+
 from news.models import ArticlePage
 
 class ExchangesIndexPage(RoutablePageMixin, Page):
@@ -29,6 +32,16 @@ class ExchangesIndexPage(RoutablePageMixin, Page):
         context = super(ExchangesIndexPage, self).get_context(request)
         exchangepages = ExchangePage.objects.live().filter(featured=False).order_by('-first_published_at')
         featuredexchanges = ExchangePage.objects.live().filter(featured=True).order_by('-first_published_at')
+        
+        page = request.GET.get('page')
+        paginator = Paginator(exchangepages, 16)  # Show 12 pages per page
+        try:
+            exchangepages = paginator.page(page)
+        except PageNotAnInteger:
+            exchangepages = paginator.page(1)
+        except EmptyPage:
+            exchangepages = paginator.page(paginator.num_pages)
+            
         context['exchangepages'] = exchangepages
         context['featuredexchanges'] = featuredexchanges
         return context

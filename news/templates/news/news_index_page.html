@@ -273,36 +273,41 @@
                         {% endfor %}
                     </div>
                 {% endif %}
-                <h2>Recent news</h2>
-                <div class="recent_news flex flex_align-content flex_wrap">
-                    {% for post in newspages %}
-                        {% with post=post.specific %}
-                            <article>
-                                <a href="{% pageurl post %}">
-                                    {% if post.pill_text %}
-                                        {% if post.green_pill %}
-                                            <p class="news_overlay overlay_green">
-                                        {% elif post.red_pill %}
-                                            <p class="news_overlay overlay_red">
-                                        {% elif post.blue_pill %}
-                                            <p class="news_overlay overlay_blue">
-                                        {% elif post.yellow_pill %}
-                                            <p class="news_overlay overlay_yellow">
+                {% if not allnews %}
+                    <div class="flex flex_align-items flex_justify-content">
+                        <h2>Recent news</h2>
+                        <a class="all_news_button" href="/news/all">See all news</a>
+                    </div>
+                    <div class="recent_news flex flex_align-content flex_wrap">
+                        {% for post in newspages %}
+                            {% with post=post.specific %}
+                                <article>
+                                    <a href="{% pageurl post %}">
+                                        {% if post.pill_text %}
+                                            {% if post.green_pill %}
+                                                <p class="news_overlay overlay_green">
+                                            {% elif post.red_pill %}
+                                                <p class="news_overlay overlay_red">
+                                            {% elif post.blue_pill %}
+                                                <p class="news_overlay overlay_blue">
+                                            {% elif post.yellow_pill %}
+                                                <p class="news_overlay overlay_yellow">
+                                            {% endif %}
+                                                {{ post.pill_text }}</p>
                                         {% endif %}
-                                            {{ post.pill_text }}</p>
-                                    {% endif %}
-                                    {% image post.image fill-270x152-c50 as image %}
-                                    <img src="{{ image.url }}"/>
-                                    <h3>{{ post.title|truncatechars:75 }}</h3>
-                                    <div class="flex flex_align-text">
-                                        <p>{{ post.first_published_at|naturaltime }}</p>
-                                        <p>{{ post.author|richtext }}</p>
-                                    </div>
-                                </a>
-                            </article>
-                        {% endwith %}
-                    {% endfor %}
-                </div>
+                                        {% image post.image fill-270x152-c50 as image %}
+                                        <img src="{{ image.url }}"/>
+                                        <h3>{{ post.title|truncatechars:75 }}</h3>
+                                        <div class="flex flex_align-text">
+                                            <p>{{ post.first_published_at|naturaltime }}</p>
+                                            <p>{{ post.author|richtext }}</p>
+                                        </div>
+                                    </a>
+                                </article>
+                            {% endwith %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
         </main>
     {% endif %}
@@ -361,6 +366,58 @@
                         </article>
                     {% endfor %}
                 </div>
+            </div>
+        </main>
+    {% endif %}
+    
+    {% if allnews %}
+        <main class="news_articles">
+            <div class="wrapper">
+                <h2>All news</h2>
+                <div class="recent_news flex flex_align-content flex_wrap">
+                    {% for page in allnews %}
+                        <article>
+                            <a href="{% pageurl page %}">
+                                {% if page.pill_text %}
+                                    {% if page.green_pill %}
+                                        <p class="news_overlay overlay_green">
+                                    {% elif page.red_pill %}
+                                        <p class="news_overlay overlay_red">
+                                    {% elif page.blue_pill %}
+                                        <p class="news_overlay overlay_blue">
+                                    {% elif page.yellow_pill %}
+                                        <p class="news_overlay overlay_yellow">
+                                    {% endif %}
+                                        {{ page.pill_text }}</p>
+                                {% endif %}
+                                {% image page.image fill-270x152-c50 as image %}
+                                <img src="{{ image.url }}"/>
+                                <h3>{{ page.title|truncatechars:75 }}</h3>
+                                <div class="flex flex_align-text">
+                                    <p>{{ page.first_published_at|naturaltime }}</p>
+                                    <p>{{ page.author|richtext }}</p>
+                                </div>
+                            </a>
+                        </article>
+                    {% endfor %}
+                </div>
+                {% if allnews.paginator.num_pages > 1 %}
+                    <ul class="pager">
+                        <li class="previous">
+                            {% if allnews.has_previous %}
+                                <a href="?page={{ allnews.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}"><< Previous</a>
+                            {% endif %}
+                        </li>
+                        <li class="next">
+                            {% if allnews.has_next %}
+                                <a href="?page={{ allnews.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Next >></a>
+                            {% endif %}
+                        </li>
+                        <li class="pages">
+                            Page {{ allnews.number }} of {{ allnews.paginator.num_pages }}
+                        </li>
+                    </ul>
+                {% endif %}
             </div>
         </main>
     {% endif %}

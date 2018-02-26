@@ -45,11 +45,11 @@ class NewsIndexPage(RoutablePageMixin, Page):
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
         context = super(NewsIndexPage, self).get_context(request)
-        newspages = ArticlePage.objects.live().filter(press_release=False).order_by('-first_published_at')
-        pressreleases = ArticlePage.objects.live().filter(press_release=True).order_by('-first_published_at')
+        newspages = ArticlePage.objects.live().filter(press_release=False).order_by('-first_published_at')[:16]
+        pressreleases = ArticlePage.objects.live().filter(press_release=True).order_by('-first_published_at')[:4]
         
         # page = request.GET.get('page')
-        # paginator = Paginator(newspages, 2)  # Show 12 pages per page
+        # paginator = Paginator(newspages, 12)  # Show 12 pages per page
         # try:
         #     newspages = paginator.page(page)
         # except PageNotAnInteger:
@@ -92,6 +92,24 @@ class NewsIndexPage(RoutablePageMixin, Page):
         releases = ArticlePage.objects.live().filter(press_release=True).order_by('-first_published_at')
         context = {
             'releases': releases,
+        }
+        return render(request, 'news/news_index_page.html', context)
+        
+    @route('^all/$', name='all_archive')
+    @route('^all/(\w+)/$', name='all_archive')   
+    def all_archive(self, request, tag=None):
+
+        allnews = ArticlePage.objects.live().filter(press_release=False).order_by('-first_published_at')
+        page = request.GET.get('page')
+        paginator = Paginator(allnews, 20)  # Show 12 pages per page
+        try:
+            allnews = paginator.page(page)
+        except PageNotAnInteger:
+            allnews = paginator.page(1)
+        except EmptyPage:
+            allnews = paginator.page(paginator.num_pages)
+        context = {
+            'allnews': allnews,
         }
         return render(request, 'news/news_index_page.html', context)
         

@@ -388,6 +388,23 @@
                         </a>
                     {% endwith %}
                 {% endfor %}
+                {% if walletspages.paginator.num_pages > 1 %}
+                    <ul class="pager">
+                        <li class="previous">
+                            {% if walletspages.has_previous %}
+                                <a href="?page={{ walletspages.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}"><< Previous</a>
+                            {% endif %}
+                        </li>
+                        <li class="next">
+                            {% if walletspages.has_next %}
+                                <a href="?page={{ walletspages.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">Next >></a>
+                            {% endif %}
+                        </li>
+                        <li class="pages">
+                            Page {{ walletspages.number }} of {{ walletspages.paginator.num_pages }}
+                        </li>
+                    </ul>
+                {% endif %}
             </div>
         </main>
     {% endif %}
@@ -400,7 +417,7 @@
                         <a class="wallet_card wallet_card_featured flex flex_align-items" href="{% pageurl page %}">
                         <p class="Sponsored_pill">Sponsored</p>
                     {% else %}
-                       <a class="wallet_card flex flex_align-items" href="{% pageurl page %}">
+                        <a class="wallet_card flex flex_align-items" href="{% pageurl page %}">
                     {% endif %}
                         <article class="flex flex_align-items">
                             {% image page.image fill-110x110-c50 as image %}
