@@ -101,7 +101,7 @@
                 </div>
             {% endif %}
             <p class="recent_news_header">Recent articles</p>
-            <div class="recent_news flex flex_align-content flex_direction flex_wrap">
+            <div class="sticky recent_news flex flex_align-content flex_direction flex_wrap">
                 {% for post in newspages|slice:":4" %}
                     {% with post=post.specific %}
                         {% if post != page and post not in relatedarticles %}

@@ -914,7 +914,7 @@ footer {
     margin-bottom: 0;
 }
 
-.recent_news:nth-child(4) {
+.sticky {
     top: 110px;
     position: -webkit-sticky;
     position: sticky;
