@@ -235,7 +235,7 @@
                                 <p class="Sponsored_pill">Sponsored</p>
                                 {% image post.image fill-145x131-c50 as image %}
                                 <img src="{{ image.url }}"/>
-                                <div>
+                                <div class="exchange_card_info">
                                     <h3>{{ post.title }}</h3>
                                     {{ post.body|truncatechars:146|richtext }}
                                     <ul class="flex flex_align-items">
@@ -262,7 +262,7 @@
                             <article class="flex flex_align-items">
                                 {% image post.image fill-145x131-c50 as image %}
                                 <img src="{{ image.url }}"/>
-                                <div>
+                                <div class="exchange_card_info">
                                     <h3>{{ post.title }}</h3>
                                     {{ post.body|truncatechars:146|richtext }}
                                     <ul class="flex flex_align-items">
@@ -284,14 +284,14 @@
                 {% endfor %}
                 {% if exchangepages.paginator.num_pages > 1 %}
                     <ul class="pager">
-                        <li class="pages">
-                            Page {{ exchangepages.number }} of {{ exchangepages.paginator.num_pages }}
-                        </li>
                         <div class="page_button_container">
                             <li class="previous">
                                 {% if exchangepages.has_previous %}
                                     <a href="?page={{ exchangepages.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}"><< Previous</a>
                                 {% endif %}
+                            </li>
+                            <li class="pages">
+                                Page {{ exchangepages.number }} of {{ exchangepages.paginator.num_pages }}
                             </li>
                             <li class="next">
                                 {% if exchangepages.has_next %}
@@ -319,7 +319,7 @@
                             <article class="flex flex_align-items">
                                 {% image page.image fill-145x131-c50 as image %}
                                 <img src="{{ image.url }}"/>
-                                <div>
+                                <div class="exchange_card_info">
                                     <h3>{{ page.title }}</h3>
                                     {{ page.body|truncatechars:146|richtext }}
                                     <ul class="flex flex_align-items">

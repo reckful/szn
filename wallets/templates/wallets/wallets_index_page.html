@@ -390,14 +390,14 @@
                 {% endfor %}
                 {% if walletspages.paginator.num_pages > 1 %}
                     <ul class="pager">
-                        <li class="pages">
-                            Page {{ walletspages.number }} of {{ walletspages.paginator.num_pages }}
-                        </li>
                         <div class="page_button_container">
                             <li class="previous">
                                 {% if walletspages.has_previous %}
                                     <a href="?page={{ walletspages.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}"><< Previous</a>
                                 {% endif %}
+                            </li>
+                            <li class="pages">
+                                Page {{ walletspages.number }} of {{ walletspages.paginator.num_pages }}
                             </li>
                             <li class="next">
                                 {% if walletspages.has_next %}
