@@ -284,7 +284,7 @@
                 {% endfor %}
                 {% if exchangepages.paginator.num_pages > 1 %}
                     <ul class="pager">
-                        <div class="page_button_container">
+                        <div class="page_button_container flex flex_align-items">
                             <li class="previous">
                                 {% if exchangepages.has_previous %}
                                     <a href="?page={{ exchangepages.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}"><< Previous</a>
