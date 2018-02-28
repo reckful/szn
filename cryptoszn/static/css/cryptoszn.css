@@ -2703,6 +2703,7 @@ blockquote span{
     
     .wallet_card article > img {
         margin-right: 0;
+        margin-bottom: 20px;
     }
     
     .wallet_card ul {
@@ -2796,6 +2797,12 @@ blockquote span{
     
     .ico_end {
         margin-left: 10px;
+    }
+}
+
+@media (max-width: 420px) {
+    .slanted_header {
+        height: 725px!important;
     }
 }
 
