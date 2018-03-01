@@ -70,12 +70,12 @@ class ExchangesIndexPage(RoutablePageMixin, Page):
         }
         return render(request, 'exchanges/exchanges_index_page.html', context)
 
-    def serve_preview(self, request, mode_name):
-        # Needed for previews to work
-        return self.serve(request)
+    # def serve_preview(self, request, mode_name):
+    #     # Needed for previews to work
+    #     return self.serve(request)
         
-    def children(self):
-        return self.get_children().specific().live()
+    # def children(self):
+    #     return self.get_children().specific().live()
         
     def get_posts(self, tag=None):
         posts = ExchangePage.objects.live().descendant_of(self)
@@ -84,13 +84,13 @@ class ExchangesIndexPage(RoutablePageMixin, Page):
         return posts
 
     # Returns the list of Tags for all child posts of this BlogPage.
-    def get_child_tags(self):
-        tags = []
-        for post in self.get_posts():
-            # Not tags.append() because we don't want a list of lists
-            tags += post.get_tags
-        tags = sorted(set(tags))
-        return tags
+    # def get_child_tags(self):
+    #     tags = []
+    #     for post in self.get_posts():
+    #         # Not tags.append() because we don't want a list of lists
+    #         tags += post.get_tags
+    #     tags = sorted(set(tags))
+    #     return tags
 
 
 # ... (Keep the definition of ExchangesIndexPage)

@@ -292,7 +292,7 @@
                                         </div>
                                     </div>
                                     <ul class="flex flex_align-items flex_wrap">
-                                        {% for tag in post.get_5tags %}
+                                        {% for tag in post.get_tags|slice:":5" %}
                                             <li>
                                                 {{ tag }}
                                             </li>
@@ -372,7 +372,7 @@
                                         </div>
                                     </div>
                                     <ul class="flex flex_align-items flex_wrap">
-                                        {% for tag in post.get_5tags %}
+                                        {% for tag in post.get_tags|slice:":5" %}
                                             <li>
                                                 {{ tag }}
                                             </li>
@@ -481,7 +481,7 @@
                                     </div>
                                 </div>
                                 <ul class="flex flex_align-items flex_wrap">
-                                    {% for tag in page.get_5tags %}
+                                    {% for tag in page.get_tags|slice:":5" %}
                                         <li>
                                             {{ tag }}
                                         </li>
