@@ -30,11 +30,11 @@ class ExchangesIndexPage(RoutablePageMixin, Page):
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
         context = super(ExchangesIndexPage, self).get_context(request)
-        exchangepages = ExchangePage.objects.live().filter(featured=False).order_by('-first_published_at')
+        exchangepages = ExchangePage.objects.live().filter(featured=False).order_by('first_published_at')
         featuredexchanges = ExchangePage.objects.live().filter(featured=True).order_by('-first_published_at')
         
         page = request.GET.get('page')
-        paginator = Paginator(exchangepages, 16)  # Show 12 pages per page
+        paginator = Paginator(exchangepages, 8)  # Show 12 pages per page
         try:
             exchangepages = paginator.page(page)
         except PageNotAnInteger:
