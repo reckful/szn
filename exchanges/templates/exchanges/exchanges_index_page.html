@@ -239,7 +239,7 @@
                                     <h3>{{ post.title }}</h3>
                                     {{ post.body|truncatechars:146|richtext }}
                                     <ul class="flex flex_align-items">
-                                        {% for tag in post.get_tags|slice:":6" %}
+                                        {% for tag in post.get_6tags %}
                                             <li>
                                                 {{ tag }}
                                             </li>
@@ -266,7 +266,7 @@
                                     <h3>{{ post.title }}</h3>
                                     {{ post.body|truncatechars:146|richtext }}
                                     <ul class="flex flex_align-items">
-                                        {% for tag in post.get_tags|slice:":6" %}
+                                        {% for tag in post.get_6tags %}
                                             <li>
                                                 {{ tag }}
                                             </li>
@@ -323,7 +323,7 @@
                                     <h3>{{ page.title }}</h3>
                                     {{ page.body|truncatechars:146|richtext }}
                                     <ul class="flex flex_align-items">
-                                        {% for tag in page.get_tags|slice:":6" %}
+                                        {% for tag in page.get_6tags %}
                                             <li>
                                                 {{ tag }}
                                             </li>
