@@ -46,7 +46,7 @@ class WalletsIndexPage(RoutablePageMixin, Page):
         sponsoredwallets = WalletPage.objects.live().filter(sponsored=True).order_by('-first_published_at')
         
         page = request.GET.get('page')
-        paginator = Paginator(walletspages, 14)  # Show 12 pages per page
+        paginator = Paginator(walletspages, 12)  # Show 12 pages per page
         try:
             walletspages = paginator.page(page)
         except PageNotAnInteger:

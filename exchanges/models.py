@@ -34,7 +34,7 @@ class ExchangesIndexPage(RoutablePageMixin, Page):
         featuredexchanges = ExchangePage.objects.live().filter(featured=True).order_by('-first_published_at')
         
         page = request.GET.get('page')
-        paginator = Paginator(exchangepages, 8)  # Show 12 pages per page
+        paginator = Paginator(exchangepages, 6)  # Show 12 pages per page
         try:
             exchangepages = paginator.page(page)
         except PageNotAnInteger:
