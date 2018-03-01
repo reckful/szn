@@ -239,16 +239,16 @@
                                     <h3>{{ post.title }}</h3>
                                     {{ post.body|truncatechars:146|richtext }}
                                     <ul class="flex flex_align-items">
-                                        <!--{% for tag in post.get_6tags %}-->
-                                        <!--    <li>-->
-                                        <!--        {{ tag }}-->
-                                        <!--    </li>-->
-                                        <!--{% endfor %}-->
-                                        <!--{% if post.get_tags|length > 6 %}-->
-                                        <!--    <li class="coins_left_text">-->
-                                        <!--        +{{ post.get_tags|length|add:"-6" }} more-->
-                                        <!--    </li>-->
-                                        <!--{% endif %}-->
+                                        {% for tag in post.get_tags|slice:":6" %}
+                                            <li>
+                                                {{ tag }}
+                                            </li>
+                                        {% endfor %}
+                                        {% if post.get_tags|length > 6 %}
+                                            <li class="coins_left_text">
+                                                +{{ post.get_tags|length|add:"-6" }} more
+                                            </li>
+                                        {% endif %}
                                     </ul>
                                 </div>
                             </article>
@@ -266,16 +266,16 @@
                                     <h3>{{ post.title }}</h3>
                                     {{ post.body|truncatechars:146|richtext }}
                                     <ul class="flex flex_align-items">
-                                        <!--{% for tag in post.get_6tags %}-->
-                                        <!--    <li>-->
-                                        <!--        {{ tag }}-->
-                                        <!--    </li>-->
-                                        <!--{% endfor %}-->
-                                        <!--{% if post.get_tags|length > 6 %}-->
-                                        <!--    <li class="coins_left_text">-->
-                                        <!--        +{{ post.get_tags|length|add:"-6" }} more-->
-                                        <!--    </li>-->
-                                        <!--{% endif %}-->
+                                        {% for tag in post.get_tags|slice:":6" %}
+                                            <li>
+                                                {{ tag }}
+                                            </li>
+                                        {% endfor %}
+                                        {% if post.get_tags|length > 6 %}
+                                            <li class="coins_left_text">
+                                                +{{ post.get_tags|length|add:"-6" }} more
+                                            </li>
+                                        {% endif %}
                                     </ul>
                                 </div>
                             </article>
@@ -323,16 +323,16 @@
                                     <h3>{{ page.title }}</h3>
                                     {{ page.body|truncatechars:146|richtext }}
                                     <ul class="flex flex_align-items">
-                                        <!--{% for tag in page.get_6tags %}-->
-                                        <!--    <li>-->
-                                        <!--        {{ tag }}-->
-                                        <!--    </li>-->
-                                        <!--{% endfor %}-->
-                                        <!--{% if page.get_tags|length > 6 %}-->
-                                        <!--    <li class="coins_left_text">-->
-                                        <!--        +{{ page.get_tags|length|add:"-6" }} more-->
-                                        <!--    </li>-->
-                                        <!--{% endif %}-->
+                                        {% for tag in page.get_tags|slice:":6" %}
+                                            <li>
+                                                {{ tag }}
+                                            </li>
+                                        {% endfor %}
+                                        {% if page.get_tags|length > 6 %}
+                                            <li class="coins_left_text">
+                                                +{{ page.get_tags|length|add:"-6" }} more
+                                            </li>
+                                        {% endif %}
                                     </ul>
                                 </div>
                             </article>

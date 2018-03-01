@@ -147,24 +147,8 @@ class ExchangePage(Page):
         We're additionally adding a URL to access BlogPage objects with that tag
         """
         tags = self.tags.all()
-        for tag in tags:
-            tag.url = '/'+'/'.join(s.strip('/') for s in [
-                self.get_parent().url,
-                'tags',
-                tag.slug
-            ])
         return tags
         
-    @property
-    def get_6tags(self):
-        tags = self.tags.all()[:6]
-        for tag in tags:
-            tag.url = '/'+'/'.join(s.strip('/') for s in [
-                self.get_parent().url,
-                'tags',
-                tag.slug
-            ])
-        return tags
     
     # Specifies parent to BlogPage as being BlogIndexPages
     parent_page_types = ['ExchangesIndexPage']
