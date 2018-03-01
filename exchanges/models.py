@@ -84,13 +84,13 @@ class ExchangesIndexPage(RoutablePageMixin, Page):
         return posts
 
     # Returns the list of Tags for all child posts of this BlogPage.
-    # def get_child_tags(self):
-    #     tags = []
-    #     for post in self.get_posts():
-    #         # Not tags.append() because we don't want a list of lists
-    #         tags += post.get_tags
-    #     tags = sorted(set(tags))
-    #     return tags
+    def get_child_tags(self):
+        tags = []
+        for post in self.get_posts():
+            # Not tags.append() because we don't want a list of lists
+            tags += post.get_tags
+        tags = sorted(set(tags))
+        return tags
 
 
 # ... (Keep the definition of ExchangesIndexPage)
