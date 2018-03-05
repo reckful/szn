@@ -124,7 +124,7 @@ class NewsIndexPage(RoutablePageMixin, Page):
     def get_posts(self, tag=None):
         posts = ArticlePage.objects.live().descendant_of(self)
         if tag:
-            posts = posts.filter(tags=tag)
+            posts = posts.filter(tags=tag).order_by('-first_published_at')
         return posts
 
     # Returns the list of Tags for all child posts of this BlogPage.

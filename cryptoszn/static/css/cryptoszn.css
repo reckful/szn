@@ -83,6 +83,12 @@ html {
     height: 100%;
 }
 
+@media (max-width:1024px) {
+    html {
+        overflow-x: hidden;
+    }
+}
+
 body {
     background: #F4F4F4;
     font-family: 'Montserrat', sans-serif;
@@ -118,7 +124,6 @@ a {
     -o-webkit-flex: 1 0 auto;
     webkit-flex: 1 0 auto;
     flex: 1 0 auto;
-    overflow-x: hidden;
 }
 
 .footer {
@@ -128,7 +133,6 @@ a {
     -o-webkit-flex-shrink: 0;
     webkit-flex-shrink: 0;
     flex-shrink: 0;
-    overflow-x: hidden;
 }
 
 .flex {
@@ -1343,6 +1347,7 @@ footer {
 
 .home_header {
     background-color: transparent;
+    overflow-x: hidden;
 }
 
 .home_header .wrapper {
@@ -1390,6 +1395,7 @@ footer {
     height: 468px;
     width: 110%;
     z-index: -1;
+    overflow-x: hidden;
 }
 
 .all_news_button {

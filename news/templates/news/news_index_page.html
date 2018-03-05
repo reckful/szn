@@ -233,7 +233,7 @@
                             {% with post=post.specific %}
                                 {% if post.featured %}
                                     <article class="flex flex_align-items">
-                                        <a href="{% pageurl post %}">
+                                        <a class="flex" href="{% pageurl post %}">
                                             {{ coindata }}
                                             {% image post.image fill-630x360-c50 as image %}
                                             <img src="{{ image.url }}"/>
