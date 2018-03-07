@@ -100,26 +100,49 @@
                     {% endfor %}
                 </div>
             {% endif %}
-            <p class="recent_news_header">Recent articles</p>
-            <div class="sticky recent_news flex flex_align-content flex_direction flex_wrap">
-                {% for post in newspages|slice:":3" %}
-                    {% with post=post.specific %}
-                        {% if post != page and post not in relatedarticles %}
-                            <article>
-                                <a href="{% pageurl post %}">
-                                    {% image post.image fill-270x152-c50 as image %}
-                                    <img src="{{ image.url }}"/>
-                                    <h3>{{ post.title|truncatechars:75 }}</h3>
-                                    <div class="flex flex_align-text">
-                                        <p>{{ post.first_published_at|naturaltime }}</p>
-                                        <p>{{ post.author|richtext }}</p>
-                                    </div>
-                                </a>
-                            </article>
-                        {% endif %}
-                    {% endwith %}
-                {% endfor %}
-            </div>
+            {% if relatedarticles|length == 1 %}
+                <p class="recent_news_header">Recent articles</p>
+                <div class="sticky recent_news flex flex_align-content flex_direction flex_wrap">
+                    {% for post in newspages|slice:":5" %}
+                        {% with post=post.specific %}
+                            {% if post != page and post not in relatedarticles %}
+                                <article>
+                                    <a href="{% pageurl post %}">
+                                        {% image post.image fill-270x152-c50 as image %}
+                                        <img src="{{ image.url }}"/>
+                                        <h3>{{ post.title|truncatechars:75 }}</h3>
+                                        <div class="flex flex_align-text">
+                                            <p>{{ post.first_published_at|naturaltime }}</p>
+                                            <p>{{ post.author|richtext }}</p>
+                                        </div>
+                                    </a>
+                                </article>
+                            {% endif %}
+                        {% endwith %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="recent_news_header">Recent articles</p>
+                <div class="sticky recent_news flex flex_align-content flex_direction flex_wrap">
+                    {% for post in newspages|slice:":3" %}
+                        {% with post=post.specific %}
+                            {% if post != page and post not in relatedarticles %}
+                                <article>
+                                    <a href="{% pageurl post %}">
+                                        {% image post.image fill-270x152-c50 as image %}
+                                        <img src="{{ image.url }}"/>
+                                        <h3>{{ post.title|truncatechars:75 }}</h3>
+                                        <div class="flex flex_align-text">
+                                            <p>{{ post.first_published_at|naturaltime }}</p>
+                                            <p>{{ post.author|richtext }}</p>
+                                        </div>
+                                    </a>
+                                </article>
+                            {% endif %}
+                        {% endwith %}
+                    {% endfor %}
+                </div>
+            {% endif %}
         </nav>
     </main>
  
