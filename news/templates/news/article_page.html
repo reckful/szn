@@ -81,7 +81,7 @@
             {% if relatedarticles|length != 1 and page.press_release == False %}
                 <p class="recent_news_header">Related articles</p>
                 <div class="recent_news flex flex_align-content flex_direction flex_wrap">
-                    {% for post in relatedarticles|slice:":4" %}
+                    {% for post in relatedarticles|slice:":3" %}
                         {% with post=post.specific %}
                             {% if post != page %}
                                 <article>
@@ -102,7 +102,7 @@
             {% endif %}
             <p class="recent_news_header">Recent articles</p>
             <div class="sticky recent_news flex flex_align-content flex_direction flex_wrap">
-                {% for post in newspages|slice:":4" %}
+                {% for post in newspages|slice:":3" %}
                     {% with post=post.specific %}
                         {% if post != page and post not in relatedarticles %}
                             <article>
