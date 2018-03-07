@@ -341,4 +341,10 @@
             </div>
         </main>
     {% endif %}
+    
+    {% if posts == 0 %}
+        <main class="wrapper">
+            <h2>Sorry, we have no articles about <span class="coin_highlight">{{ tag }}</span></h2>
+        </main>
+    {% endif %}
 {% endblock %}
