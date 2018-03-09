@@ -1026,6 +1026,28 @@ footer {
     width: 100%;
 }
 
+.all_news_button_container {
+    justify-content: center;
+    -webkit-webkit-justify-content: center;
+    -moz-webkit-justify-content: center;
+    -ms-webkit-justify-content: center;
+    -o-webkit-justify-content: center;
+    webkit-justify-content: center;
+}
+
+.all_news_button_container a {
+    background: #E7E7E7;
+    color: #727272;
+    padding: 8px 11px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
+.all_news_button_container a:hover {
+    background: #d8d8d8;
+}
+
 @media (max-width: 1380px) {
     .news_sort ul li:nth-child(27) {
         display: none;
