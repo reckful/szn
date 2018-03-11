@@ -241,7 +241,7 @@
                                         <div class="featured_info">
                                             <h1>{{ page.header_text }}</h1>
                                             <h3>{{ post.title }}</h3>
-                                            {{ post.preview_text|truncatechars:240|richtext }}
+                                            <p>{{ post.preview_text }}</p>
                                             <a class="button" href="{% pageurl post %}">Read More</a>
                                         </div>
                                     </article>
