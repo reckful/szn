@@ -33,8 +33,8 @@
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="@CryptoSZN">
         <meta name="twitter:creator" content="@CryptoSZN">
-        <meta name="twitter:title" content="CryptoSZN - Your cryptocurrency hub">
-        <meta name="twitter:description" content="Cryptocurrency news, guides, ICOs, wallets, exchanges. Your hub for all things cryptocurrency.">
+        <meta name="twitter:title" content="{% if page.author %}{{ page.title }}{% else %}CryptoSZN - Your cryptocurrency hub {% endif %}">
+        <meta name="twitter:description" content="{% if page.preview_text %}{{ page.preview_text }}{% else %}Cryptocurrency news, guides, ICOs, wallets, exchanges. Your hub for all things cryptocurrency.{% endif %}">
         <meta name="twitter:image:src" content="https://{{ request.site.hostname }}{% if page.image %}{% image page.image width-400 as img %}{{ img.url }}{% else %}/media/images/defaulttwitter.original.png{% endif %}" />
         <meta name="description" content="{% if self.search_description %}{{ self.search_description }}{% endif %}">
         <title>

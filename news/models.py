@@ -149,7 +149,7 @@ class ArticlePageTag(TaggedItemBase):
 
 class ArticlePage(Page):
     date = models.DateField("Post date")
-    preview_text = RichTextField(blank=True, max_length=255)
+    preview_text = models.CharField(blank=True, max_length=140)
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
         ('paragraph', blocks.RichTextBlock()),
