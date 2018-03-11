@@ -27,6 +27,13 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" X-Content-Type-Options="nosniff" />
         <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@CryptoSZN">
+        <meta name="twitter:creator" content="@CryptoSZN">
+        <meta name="twitter:title" content="CryptoSZN - Your cryptocurrency hub">
+        <meta name="twitter:description" content="Cryptocurrency news, guides, ICOs, wallets, exchanges. Your hub for all things cryptocurrency.">
+        <meta name="twitter:image:src" content="https://www.cryptoszn.com/media/images/hurdles.width-630.height-330.jpg" />
+        <meta name="description" content="{% if self.search_description %}{{ self.search_description }}{% endif %}">
         <title>
             {% block title %}
                 {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
@@ -36,7 +43,11 @@
                 - CryptoSZN
             {% endblock %}
         </title>
-        <meta name="description" content="" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://{{ request.site.hostname }}{{ self.url }}" />
+        <meta property="og:title" content="{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %} - CryptoSZN" />
+        <meta property="og:description" content="{% if self.search_description %}{{ self.search_description }}{% endif %}" />
+        <meta property="og:site_name" content="CryptoSZN" />
         <link rel="shortcut icon" href="{%static 'images/favicon.png' %}"/>
 
         {# Global stylesheets #}
